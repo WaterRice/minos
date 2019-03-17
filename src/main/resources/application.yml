@@ -1,5 +1,10 @@
+debug: true
+
 server:  
   port: 8081
+  
+logging:
+  path: out/logs
 
 spring:
   datasource:
