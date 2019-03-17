@@ -20,24 +20,27 @@
 
 package org.wingsOfHope.minos.exception;
 
+import org.wingsOfHope.minos.enums.NotFoundExceptionID;
+
 public class NotFoundException extends Exception {
 
 	private static final long serialVersionUID = -9141979960499292294L;
 	
-	protected String message;
+	private String message;
 	
-	protected Integer exceptionID;
+	private NotFoundExceptionID id;
 	
-	public NotFoundException() {
-		this.message = "资源不存在";
-		this.exceptionID = 404000;
+	public NotFoundException(String message, NotFoundExceptionID id) {
+		this.message = message;
+		this.id = id;
 	}
-	
+
 	public String getMessage() {
 		return message;
 	}
-	
-	public Integer getExceptionID() {
-		return exceptionID;
+
+	public NotFoundExceptionID getId() {
+		return id;
 	}
+	
 }
