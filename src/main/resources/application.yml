@@ -1,6 +1,6 @@
 debug: true
 
-server:  
+server:
   port: 8081
   
 logging:

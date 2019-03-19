@@ -12,15 +12,11 @@
 
 * 文件名称：NotFindException.java  
 
-* 类说明：  资源不存在异常类的公共父类
 * 
-* plus: 异常ID 404000
 
 */
 
 package org.wingsOfHope.minos.exception;
-
-import org.wingsOfHope.minos.enums.NotFoundExceptionID;
 
 public class NotFoundException extends Exception {
 
@@ -41,6 +37,23 @@ public class NotFoundException extends Exception {
 
 	public NotFoundExceptionID getId() {
 		return id;
+	}
+	
+	public static enum NotFoundExceptionID {
+		
+		DEFAULT_NOTFOUNDEXCEPTION(404000),
+		
+		USER_NOTFOUNDEXCEPTION(404001);
+		
+		private Integer id;
+		
+		NotFoundExceptionID(Integer id) {
+			this.id = id;
+		}
+		
+		public Integer getID() {
+			return id;
+		}
 	}
 	
 }

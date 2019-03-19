@@ -1,6 +1,6 @@
 /**  
 
-* 创建时间：2019年3月17日 下午4:10:11  
+* 创建时间：2019年3月19日 下午7:04:55  
 
 * 项目名称：minos  
 
@@ -16,7 +16,7 @@
 
 */
 
-package org.wingsOfHope.minos.exceptionHandler;
+package org.wingsOfHope.minos.exception;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,19 +25,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.wingsOfHope.minos.exception.NotFoundException;
 
 @RestControllerAdvice
 public class NotFoundExceptionHandler {
 
+	/*
+	 * @param NotFoundException异常类
+	 * 
+	 * NotFoundException的处理类
+	 * 
+	 */
 	@ExceptionHandler(NotFoundException.class)
 	@ResponseStatus(value=HttpStatus.NOT_FOUND)
 	public Map<String,Object> handleNotFoundException(NotFoundException e) {
 		Map<String,Object> responseEntity = new HashMap<>();
-		responseEntity.put("help", "http://localhost/exception/" + e.getId().getID());
+		responseEntity.put("help", "http://localhost:8081/exception/" + e.getId().getID());
 		responseEntity.put("message",e.getMessage());
 		responseEntity.put("code",e.getId().getID());
 		responseEntity.put("timestamp",System.currentTimeMillis());
 		return responseEntity;
 	}
+	
 }
