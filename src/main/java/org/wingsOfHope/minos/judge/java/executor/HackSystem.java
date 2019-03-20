@@ -44,6 +44,7 @@ public class HackSystem {
 		out.close();
 	}
 
+	@SuppressWarnings("unused")
 	private static volatile SecurityManager securityManager = null;
 
 	public static void setIn(InputStream in) {
