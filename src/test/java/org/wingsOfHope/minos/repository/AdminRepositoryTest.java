@@ -42,7 +42,7 @@ public class AdminRepositoryTest {
 	public void testAdminRepository() {
 		Admin admin = new Admin();
 		admin.setAcount("1236789").setPassword("1238900").setModified(1768939499L);
-		System.out.println(adminRepository.findByAcount("123456"));
+		assert adminRepository.save(admin) != null;
 		//System.out.println(adminRepository.save(new Admin()));
 	}
 	

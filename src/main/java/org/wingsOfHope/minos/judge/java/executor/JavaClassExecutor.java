@@ -18,6 +18,9 @@
 
 package org.wingsOfHope.minos.judge.java.executor;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -28,7 +31,7 @@ import org.wingsOfHope.minos.judge.java.compiler.StringSourceCodeCompiler;
 
 public class JavaClassExecutor {
 
-	public static String execute(byte[] classByte) {
+	public static String execute(byte[] classByte, String args) throws IOException {
 		
 		ClassModifier cm = new ClassModifier(classByte);
 		
@@ -38,6 +41,10 @@ public class JavaClassExecutor {
 		
 		Class<?> clazz = classLoader.loadByte(modifyBytes);
 		
+		InputStream inputStream = new ByteArrayInputStream(args.getBytes());
+		
+		System.setIn(inputStream);
+		
 		try {
 			Method main = clazz.getMethod("main", new Class[] {String[].class});
 			main.invoke(null, new String[] {null});
@@ -46,10 +53,8 @@ public class JavaClassExecutor {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.getCause().printStackTrace(HackSystem.err);
 		}
 		
@@ -62,14 +67,24 @@ public class JavaClassExecutor {
 		DiagnosticCollector<JavaFileObject> collector = new DiagnosticCollector<>();
 		String code = "import java.util.ArrayList;\r\n" + 
 				"import java.util.List;\r\n" + 
+				"import java.util.Scanner;\r\n" + 
 				"\r\n" + 
 				"public class Solution {\r\n" + 
 				"	public static void main(String[] args) {\r\n" + 
 				"		List<Integer> list = new ArrayList<>();\r\n" + 
-				"		System.out.println(\"hello, please compile me.\");\r\n" + 
+				"		Scanner scanner = new Scanner(System.in);\r\n" + 
+				"		//String msg = scanner.next();\r\n" + 
+				"		//System.out.println(msg);\r\n" + 
+				"		//Integer a = scanner.nextInt();\r\n" + 
+				"		//System.out.println(a);\r\n" + 
+				"		int n = scanner.nextInt();\r\n" + 
+				"		System.out.println(n);\r\n" + 
+				"		for(int i = 0; i < n; i++) {\r\n" + 
+				"			System.out.println(scanner.nextInt());\r\n" + 
+				"		}\r\n" + 
 				"	}\r\n" + 
 				"}";
 		byte[] result = StringSourceCodeCompiler.compile(code, collector);
-		System.out.println(execute(result));
+		System.out.println(execute(result,"5\n7 8 9 10 7"));
 	}
 }
