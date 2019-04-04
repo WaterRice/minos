@@ -1,6 +1,6 @@
 /**  
 
-* 创建时间：2019年4月4日 下午7:23:05  
+* 创建时间：2019年4月4日 下午7:57:29  
 
 * 项目名称：minos  
 
@@ -10,7 +10,7 @@
 
 * @since JDK 1.8  
 
-* 文件名称：Admin.java  
+* 文件名称：Teacher.java  
 
 * 类说明：  
 
@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Admin implements Serializable {
+public class Teacher implements Serializable {
 
 	private Integer id;
 	
@@ -35,8 +35,12 @@ public class Admin implements Serializable {
 	
 	private String password;
 	
+	private String name;
+	
+	private String email;
+	
 	private Long modified;
 	
-	private static final long serialVersionUID = -9084718288837008507L;
+	private static final long serialVersionUID = -7837724663892820275L;
 	
 }

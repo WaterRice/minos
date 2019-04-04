@@ -21,8 +21,6 @@ package org.wingsOfHope.minos.utils;
 import org.springframework.util.DigestUtils;
 
 public class EncodeUtils {
-	
-	private final static String PRIVATE_KEY = "LQ never give up!";
 
 	public static String MD5Encode(String original) {
 		return DigestUtils.md5DigestAsHex(original.getBytes());
