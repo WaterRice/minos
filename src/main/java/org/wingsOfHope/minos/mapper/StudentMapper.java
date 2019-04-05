@@ -1,6 +1,6 @@
 /**  
 
-* 创建时间：2019年4月4日 下午8:05:57  
+* 创建时间：2019年4月5日 上午10:00:12  
 
 * 项目名称：minos  
 
@@ -10,7 +10,7 @@
 
 * @since JDK 1.8  
 
-* 文件名称：TeacherMapper.java  
+* 文件名称：StudentMapper.java  
 
 * 类说明：  
 
@@ -19,11 +19,8 @@
 package org.wingsOfHope.minos.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.wingsOfHope.minos.entity.Teacher;
 
 @Mapper
-public interface TeacherMapper {
-	
-	Teacher findById(Integer id) throws Exception;
-	
+public interface StudentMapper {
+
 }

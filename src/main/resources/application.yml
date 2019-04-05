@@ -3,6 +3,8 @@ server:
   
 logging:
   path: out/logs
+  level:
+    org.wingsOfHope.minos.mapper: DEBUG
 
 spring:
   datasource:
