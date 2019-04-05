@@ -18,9 +18,13 @@
 
 package org.wingsOfHope.minos.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.wingsOfHope.minos.entity.Subject;
 
 @Mapper
 public interface SubjectMapper {
 
+	List<Subject> findAll() throws Exception;
 }

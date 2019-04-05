@@ -41,4 +41,11 @@ public class AdminMapperTest {
 		System.out.println(admin);
 	}
 	
+	@Test
+	public void testFindPasswordByAcount() throws Exception {
+		String password = adminMapper.findPasswordByAcount("123456");
+		assert password != null;
+		System.out.println(password);
+	}
+	
 }

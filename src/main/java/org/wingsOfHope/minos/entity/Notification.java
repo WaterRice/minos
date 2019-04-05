@@ -1,6 +1,6 @@
 /**  
 
-* 创建时间：2019年4月5日 上午10:20:31  
+* 创建时间：2019年4月5日 下午7:47:22  
 
 * 项目名称：minos  
 
@@ -10,7 +10,7 @@
 
 * @since JDK 1.8  
 
-* 文件名称：Homework.java  
+* 文件名称：Notification.java  
 
 * 类说明：  
 
@@ -31,22 +31,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(value=Include.NON_NULL)
-public class Homework implements Serializable {
+public class Notification implements Serializable {
 
 	private Integer id;
 	
 	private String title;
 	
-	private String descb;
+	private String content;
 	
-	private String repu;
+	private Long time;
 	
-	private Long from;
+	private Teacher teacher;
 	
-	private Long to;
-	
-	private Subject subject;
-	
-	private static final long serialVersionUID = -7567299842716266220L;
+	private static final long serialVersionUID = 8258697817604590113L;
 	
 }

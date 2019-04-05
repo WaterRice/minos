@@ -21,20 +21,53 @@ package org.wingsOfHope.minos.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.wingsOfHope.minos.entity.Admin;
 
 @Mapper
 public interface AdminMapper {
 
 	/**
-	 *     根据账号查找密码
+	 * 根据账号查找密码
 	 * 
-	 * @param acount
-	 * 
-	 * @return Admin
+	 * @param String acount
+	 * @return String password
+	 * @throws Exception
 	 * 
 	 */
-	@Select("select password from minos_admin where acount = #{acount}")
+	@Select("SELECT password FROM minos_admin WHERE acount = #{acount}")
+	String findPasswordByAcount(@Param("acount") String acount) throws Exception;
+	
+	/**
+	 * 根据id查找管理员
+	 * 
+	 * @param Integer id
+	 * @return Admin admin
+	 * @throws Exception
+	 * 
+	 */
+	@Select("SELECT id, acount, password, modified FROM minos_admin WHERE id = #{id}")
+	Admin findById(@Param("id") Integer id) throws Exception;
+	
+	/**
+	 * 根据账号查找管理员
+	 * 
+	 * @param String acount
+	 * @return Admin admin
+	 * @throws Exception
+	 * 
+	 */
+	@Select("SELECT id, acount, password, modified FROM minos_admin WHERE acount = #{acount}")
 	Admin findByAcount(@Param("acount") String acount) throws Exception;
+	
+	/**
+	 * 根据id更新最近下线时间
+	 * 
+	 * @param Integer id
+	 * @throws Exception
+	 * 
+	 */
+	@Update("update minos_admin set modified = #{modified} where id = #{id}")
+	void updateModified(@Param("id") Integer id) throws Exception;
 	
 }
