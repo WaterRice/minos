@@ -37,6 +37,8 @@ public class Subject implements Serializable {
 	
 	private String name;
 	
+	private Integer teacherId;
+	
 	private Teacher teacher;
 	
 	private static final long serialVersionUID = -1033010300824957234L;
