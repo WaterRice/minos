@@ -29,6 +29,20 @@ import org.wingsOfHope.minos.entity.Subject;
 
 @Mapper
 public interface SubjectMapper {
+	
+	/**
+	 * 根据id获取课程信息
+	 * 
+	 * @param id
+	 * @return Subject
+	 * @throws Exception
+	 * 
+	 */
+	@Select("select s.*, t.name as tname "
+			+ "from (select * from minos_subject where subject_id = #{id}) s "
+			+ "inner join minos_teacher t on s.teacher_id = t.teacher_id")
+	@ResultMap(value="subjectResultMap")
+	Subject findById(@Param("id") Integer id) throws Exception;
 
 	/**
 	 *  获取课程列表
@@ -42,7 +56,7 @@ public interface SubjectMapper {
 	List<Subject> findAll() throws Exception;
 	
 	/**
-	 * 添加课程信息
+	 *  添加课程信息
 	 * 
 	 * @param subject
 	 * @throws Exception

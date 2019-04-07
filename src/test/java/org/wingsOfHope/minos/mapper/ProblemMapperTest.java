@@ -1,6 +1,6 @@
 /**  
 
-* 创建时间：2019年4月5日 上午9:29:30  
+* 创建时间：2019年4月7日 下午4:50:14  
 
 * 项目名称：minos  
 
@@ -10,7 +10,7 @@
 
 * @since JDK 1.8  
 
-* 文件名称：TeacherMapperTest.java  
+* 文件名称：ProblemMapperTest.java  
 
 * 类说明：  
 
@@ -24,28 +24,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.wingsOfHope.minos.entity.Teacher;
+import org.wingsOfHope.minos.entity.Problem;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class TeacherMapperTest {
-	
+public class ProblemMapperTest {
+
 	@Autowired
-	TeacherMapper teacherMapper;
+	ProblemMapper problemMapper;
 	
 	@Test
 	public void testFindById() throws Exception {
-		Teacher teacher = teacherMapper.findById(1);
-		assert teacher != null;
-		System.out.println(teacher.toString());
-	}
-	
-	@Test
-	public void testGetPasswordByAcount() throws Exception {
-		String password = teacherMapper.getPasswordByAcount("666666");
-		assert password != null;
-		System.out.println(password);
+		Problem problem = problemMapper.findById(1);
+		assert problem != null;
+		System.out.println(problem.toString());
 	}
 	
 }

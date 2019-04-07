@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.wingsOfHope.minos.mapper.ProblemMapper">
 
+	<resultMap type="Problem" id="problemResultMap">
+		<id column="problem_id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="descb" property="descb"/>
+		<result column="input" property="input"/>
+		<result column="output" property="output"/>
+	</resultMap>
+	
 </mapper>

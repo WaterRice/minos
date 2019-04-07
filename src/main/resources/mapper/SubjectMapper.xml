@@ -8,7 +8,7 @@
 		<result column="teacher_id" property="teacherId"/>
 		<association property="teacher" javaType="Teacher">
 			<id column="teacher_id" property="id"/>
-			<result column="t.name" property="name"/>
+			<result column="tname" property="name"/>
 		</association>
 	</resultMap>
 	

@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.wingsOfHope.minos.mapper.CodeSubmissionMapper">
 
+	<resultMap type="CodeSubmission" id="codeSubmissionResultMap">
+		<id column="codesubmission_id" property="id"/>
+		<result column="content" property="content"/>
+		<result column="status" property="status"/>
+		<result column="time" property="time"/>
+		<result column="language" property="language"/>
+		<association javaType="Student" property="student">
+			<id column="student_id" property="id"/>
+			<result column="sname" property="name"/>
+		</association>
+		<association javaType="Problem" property="problem">
+			<id column="problem_id" property="id"/>
+			<result column="ptitle" property="title"></result>
+		</association>
+	</resultMap>
+
 </mapper>

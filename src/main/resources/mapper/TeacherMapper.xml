@@ -10,15 +10,5 @@
 		<result column="modified" property="modified" />
 		<result column="name" property="name" />
 	</resultMap>
-
-	<select id="findById" resultMap="teacherResultMap">
-		SELECT * FROM minos_teacher
-		WHERE teacher_id = #{id}
-	</select>
-
-	<select id="findPasswordByAcount">
-		SELECT password FROM
-		minos_teacher WHERE acount = #{acount}
-	</select>
 	
 </mapper>

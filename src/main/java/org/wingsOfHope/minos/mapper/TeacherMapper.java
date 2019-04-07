@@ -19,11 +19,35 @@
 package org.wingsOfHope.minos.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
 import org.wingsOfHope.minos.entity.Teacher;
 
 @Mapper
 public interface TeacherMapper {
 	
-	Teacher findById(Integer id) throws Exception;
+	/**
+	 * 根据id获取教师信息
+	 * 
+	 * @param id
+	 * @return Teacher teacher
+	 * @throws Exception
+	 * 
+	 */
+	@Select("select * from minos_teacher where teacher_id = #{id}")
+	@ResultMap(value="teacherResultMap")
+	Teacher findById(@Param("id") Integer id) throws Exception;
+	
+	/**
+	 * 获取教师账号对应的密码
+	 * 
+	 * @param acount
+	 * @return String password
+	 * @throws Exception
+	 * 
+	 */
+	@Select("select password from minos_teacher where acount = #{acount}")
+	String getPasswordByAcount(@Param("acount") String acount) throws Exception;
 	
 }

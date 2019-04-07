@@ -19,8 +19,24 @@
 package org.wingsOfHope.minos.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.wingsOfHope.minos.entity.Problem;
 
 @Mapper
 public interface ProblemMapper {
 
+	/**
+	 * 根据id获取问题信息
+	 * 
+	 * @param id
+	 * @return Problem
+	 * @throws Exception
+	 * 
+	 */
+	@Select("select * from minos_problem where problem_id = #{id}")
+	@ResultMap(value="problemResultMap")
+	Problem findById(@Param("id") Integer id) throws Exception;
+	
 }

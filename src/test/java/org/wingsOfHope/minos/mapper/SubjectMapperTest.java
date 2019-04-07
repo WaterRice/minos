@@ -51,4 +51,10 @@ public class SubjectMapperTest {
 		subjectMapper.add(subject);
 	}
 	
+	@Test
+	public void testFindById() throws Exception {
+		Subject subject = subjectMapper.findById(1);
+		assert subject != null;
+		System.out.println(subject);
+	}
 }
