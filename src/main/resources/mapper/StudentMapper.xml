@@ -3,14 +3,14 @@
 <mapper namespace="org.wingsOfHope.minos.mapper.StudentMapper">
 	
 	<resultMap type="Student" id="studentResultMap">
-		<id column="student_id" property="id" />
-		<result column="acount" property="acount" />
-		<result column="password" property="password" />
-		<result column="name" property="name" />
-		<result column="gender" property="gender" />
-		<result column="group" property="group" />
-		<result column="email" property="email" />
-		<result column="modified" property="modified" />
+		<id column="student_id" property="id"/>
+		<result column="acount" property="acount"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="gender" property="gender"/>
+		<result column="group" property="group"/>
+		<result column="email" property="email"/>
+		<result column="modified" property="modified"/>
 	</resultMap>
 
 </mapper>

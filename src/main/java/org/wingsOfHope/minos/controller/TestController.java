@@ -21,6 +21,8 @@ package org.wingsOfHope.minos.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +44,10 @@ public class TestController {
 		ans.add(id + 1);
 		ans.add(id + 3);
 		return ans;
+	}
+	
+	@GetMapping("/token")
+	public void getToken(HttpServletResponse response) {
+		
 	}
 }

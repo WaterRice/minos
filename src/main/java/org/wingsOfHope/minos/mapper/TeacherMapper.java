@@ -40,6 +40,18 @@ public interface TeacherMapper {
 	Teacher findById(@Param("id") Integer id) throws Exception;
 	
 	/**
+	 * 根据账号查找教师信息
+	 * 
+	 * @param acount
+	 * @return Teacher
+	 * @throws Exception
+	 * 
+	 */
+	@Select("select * from minos_teacher where acount = #{acount}")
+	@ResultMap(value="teacherResultMap")
+	Teacher findByAcount(@Param("acount") String acount) throws Exception;
+	
+	/**
 	 * 获取教师账号对应的密码
 	 * 
 	 * @param acount
