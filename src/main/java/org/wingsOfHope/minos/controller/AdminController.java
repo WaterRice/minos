@@ -22,6 +22,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +34,6 @@ import org.wingsOfHope.minos.mapper.AdminMapper;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -43,6 +44,8 @@ public class AdminController {
 	@Autowired
 	private AdminMapper adminMapper;
 	
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	
 	/**
 	 * 管理员登录接口
 	 * 
@@ -52,17 +55,19 @@ public class AdminController {
 	 * @throws Exception
 	 * 
 	 */
-	@ApiOperation(value="获取token", notes="没有数据时返回null")
+	@ApiOperation(value="获取token", notes="密码错误时返回null")
 	@PostMapping("/token")
 	public Admin login(@RequestBody Map<String,Object> map, HttpServletResponse response) throws Exception {
 		String acount = (String) map.get("acount");
 		String password = (String) map.get("password");
+		if(acount == null || password == null) return null;
 		Admin admin = adminMapper.findByAcount(acount);
 		if(admin == null) return null;
 		if(admin.getPassword().equals(password)) {
 			String token = JWTUtil.getJws(admin.getId());
 			admin.setPassword(null);
 			response.setHeader("Authorization", token);
+			logger.info("admin " + admin.getId() + "login");
 			return admin;
 		}
 		return null;

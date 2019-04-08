@@ -22,6 +22,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +44,8 @@ public class TeacherController {
 	@Autowired
 	private TeacherMapper teacherMapper;
 	
+	private static final Logger logger = LoggerFactory.getLogger(TeacherController.class);
+	
 	/**
 	 * 教师登录接口
 	 * 
@@ -51,17 +55,19 @@ public class TeacherController {
 	 * @throws Exception
 	 * 
 	 */
-	@ApiOperation(value="获取token", notes="没有数据时返回null")
+	@ApiOperation(value="获取token", notes="密码不对时返回null")
 	@PostMapping("/token")
 	public Teacher login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
 		String acount = map.get("acount");
 		String password = map.get("password");
+		if(acount == null || password == null) return null;
 		Teacher teacher = teacherMapper.findByAcount(acount);
 		if(teacher == null) return null;
 		if(teacher.getPassword().equals(password)) {
 			String token = JWTUtil.getJws(teacher.getId());
 			teacher.setPassword(null);
 			response.setHeader("Authorization", token);
+			logger.info("teacher " + teacher.getId() + "login!");
 			return teacher;
 		}
 		return null;

@@ -48,4 +48,11 @@ public class TeacherMapperTest {
 		System.out.println(password);
 	}
 	
+	@Test
+	public void testFindByAcount() throws Exception {
+		Teacher teacher = teacherMapper.findByAcount("666666");
+		assert teacher != null;
+		System.out.println(teacher.toString());
+	}
+	
 }

@@ -14,6 +14,9 @@ spring:
     password: minos
     type: com.alibaba.druid.pool.DruidDataSource
     
+    mvc:
+       static-path-pattern: /static/**
+    
 mybatis:
   typeAliasesPackage: org.wingsOfHope.minos.entity
   mapperLocations: classpath:mapper/*.xml
