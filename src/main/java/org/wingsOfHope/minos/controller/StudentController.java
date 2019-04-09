@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Student;
-import org.wingsOfHope.minos.mapper.StudentMapper;
+import org.wingsOfHope.minos.service.StudentService;
+import org.wingsOfHope.minos.utils.EncodeUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -42,7 +43,7 @@ import io.swagger.annotations.ApiOperation;
 public class StudentController {
 
 	@Autowired
-	private StudentMapper studentMapper;
+	private StudentService studentService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 	
@@ -59,9 +60,9 @@ public class StudentController {
 	@PostMapping("/token")
 	public Student login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
 		String acount = map.get("acount");
-		String password = map.get("password");
+		String password = EncodeUtils.MD5Encode(map.get("password"));
 		if(acount == null || password == null) return null;
-		Student student = studentMapper.findByAcount(acount);
+		Student student = studentService.findByAcount(acount);
 		if(student == null) return null;
 		if(student.getPassword().equals(password)) {
 			String token = JWTUtil.getJws(student.getId());
@@ -88,14 +89,14 @@ public class StudentController {
 		String password = map.get("password");
 		String email = map.get("email");
 		Student student = new Student();
+		password = EncodeUtils.MD5Encode(password);
 		student.setAcount(acount).setEmail(email).setPassword(password);
-		studentMapper.save(student);
+		studentService.save(student);
 		String token = JWTUtil.getJws(student.getId());
 		student.setPassword(null);
 		response.setHeader("Authorization", token);
 		logger.info("student " + student.getId() + "register!");
 		return student;
 	}
-	
 	
 }

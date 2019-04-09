@@ -20,3 +20,4 @@ spring:
 mybatis:
   typeAliasesPackage: org.wingsOfHope.minos.entity
   mapperLocations: classpath:mapper/*.xml
+  

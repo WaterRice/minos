@@ -41,6 +41,8 @@ public class CodeSubmission implements Serializable {
 	
 	private Student student;
 	
+	private Integer problemId;
+	
 	private Problem problem;
 	
 	private Long time;

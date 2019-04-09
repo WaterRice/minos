@@ -18,9 +18,27 @@
 
 package org.wingsOfHope.minos.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.wingsOfHope.minos.entity.Homework;
 
 @Mapper
 public interface HomeworkMapper {
 
+	@Select("select homework_id, title, to from minos_homework order by from desc limit 20")
+	@ResultMap(value="homeworkResultMap")
+	List<Homework> getAllHomeworks() throws Exception;
+	
+	@Select("select descb, repu from minos_homework where homework_id = #{id}")
+	@ResultMap(value="homeworkResultMap")
+	Homework findById(Integer id) throws Exception;
+	
+	@Select("select to from minos_homework where homework_id = #{id}")
+	Integer getExpiredDateById(Integer id) throws Exception;
+	
+	
+	
 }

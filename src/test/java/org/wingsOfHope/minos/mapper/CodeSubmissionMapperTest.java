@@ -1,6 +1,6 @@
 /**  
 
-* 创建时间：2019年4月7日 下午4:50:14  
+* 创建时间：2019年4月9日 下午8:51:37  
 
 * 项目名称：minos  
 
@@ -10,7 +10,7 @@
 
 * @since JDK 1.8  
 
-* 文件名称：ProblemMapperTest.java  
+* 文件名称：CodeSubmissionMapperTest.java  
 
 * 类说明：  
 
@@ -26,28 +26,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.wingsOfHope.minos.entity.Problem;
+import org.wingsOfHope.minos.entity.CodeSubmission;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class ProblemMapperTest {
+public class CodeSubmissionMapperTest {
 
 	@Autowired
-	ProblemMapper problemMapper;
+	CodeSubmissionMapper codeSubmissionMapper;
 	
 	@Test
-	public void testFindById() throws Exception {
-		Problem problem = problemMapper.findById(1);
-		assert problem != null;
-		System.out.println(problem.toString());
-	}
-	
-	@Test
-	public void testGetAllProblems() throws Exception {
-		List<Problem> problems = problemMapper.getAllProblems();
-		assert problems != null && problems.size() != 0;
-		System.out.println(problems.toString());
+	public void testGetAllSubmissions() throws Exception {
+		List<CodeSubmission> submissions = codeSubmissionMapper.getAllSubmissions();
+		assert submissions != null && submissions.size() != 0;
+		System.out.println(submissions.toString());
 	}
 	
 }

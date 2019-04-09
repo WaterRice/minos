@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Admin;
-import org.wingsOfHope.minos.mapper.AdminMapper;
+import org.wingsOfHope.minos.service.AdminService;
+import org.wingsOfHope.minos.utils.EncodeUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -42,7 +43,7 @@ import io.swagger.annotations.ApiOperation;
 public class AdminController {
 	
 	@Autowired
-	private AdminMapper adminMapper;
+	private AdminService adminService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
@@ -57,11 +58,11 @@ public class AdminController {
 	 */
 	@ApiOperation(value="获取token", notes="密码错误时返回null")
 	@PostMapping("/token")
-	public Admin login(@RequestBody Map<String,Object> map, HttpServletResponse response) throws Exception {
-		String acount = (String) map.get("acount");
-		String password = (String) map.get("password");
+	public Admin login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
+		String acount = map.get("acount");
+		String password = EncodeUtils.MD5Encode(map.get("password"));
 		if(acount == null || password == null) return null;
-		Admin admin = adminMapper.findByAcount(acount);
+		Admin admin = adminService.findByAcount(acount);
 		if(admin == null) return null;
 		if(admin.getPassword().equals(password)) {
 			String token = JWTUtil.getJws(admin.getId());

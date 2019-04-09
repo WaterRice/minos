@@ -1,6 +1,6 @@
 /**  
 
-* 创建时间：2019年4月7日 下午4:50:14  
+* 创建时间：2019年4月9日 下午7:28:30  
 
 * 项目名称：minos  
 
@@ -10,7 +10,7 @@
 
 * @since JDK 1.8  
 
-* 文件名称：ProblemMapperTest.java  
+* 文件名称：NotificationMapperTest.java  
 
 * 类说明：  
 
@@ -26,28 +26,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.wingsOfHope.minos.entity.Problem;
+import org.wingsOfHope.minos.entity.Notification;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class ProblemMapperTest {
+public class NotificationMapperTest {
 
 	@Autowired
-	ProblemMapper problemMapper;
+	NotificationMapper notificationMapper;
 	
 	@Test
-	public void testFindById() throws Exception {
-		Problem problem = problemMapper.findById(1);
-		assert problem != null;
-		System.out.println(problem.toString());
-	}
-	
-	@Test
-	public void testGetAllProblems() throws Exception {
-		List<Problem> problems = problemMapper.getAllProblems();
-		assert problems != null && problems.size() != 0;
-		System.out.println(problems.toString());
+	public void testGetLatestNews() throws Exception {
+		List<Notification> news = notificationMapper.getLatestNews();
+		assert news != null;
+		for(Notification notification : news) {
+			System.out.println(notification.toString());
+		}
 	}
 	
 }

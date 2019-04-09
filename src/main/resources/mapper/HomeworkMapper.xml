@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.wingsOfHope.minos.mapper.HomeworkMapper">
 
+	<resultMap type="HomeWork" id="homeworkResultMap">
+		<id column="homework_id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="descb" property="descb"/>
+		<result column="repu" property="repu"/>
+		<result column="from" property="from"/>
+		<result column="to" property="to"/>
+		<association property="subject" javaType="Subject">
+			<id column="subject_id" property="id"/>
+			<result column="sname" property="name"/>
+		</association>
+	</resultMap>
+	
 </mapper>

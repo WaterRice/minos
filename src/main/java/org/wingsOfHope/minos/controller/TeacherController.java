@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Teacher;
-import org.wingsOfHope.minos.mapper.TeacherMapper;
+import org.wingsOfHope.minos.service.TeacherService;
+import org.wingsOfHope.minos.utils.EncodeUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -42,7 +43,7 @@ import io.swagger.annotations.ApiOperation;
 public class TeacherController {
 
 	@Autowired
-	private TeacherMapper teacherMapper;
+	private TeacherService teacherService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TeacherController.class);
 	
@@ -59,9 +60,9 @@ public class TeacherController {
 	@PostMapping("/token")
 	public Teacher login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
 		String acount = map.get("acount");
-		String password = map.get("password");
+		String password = EncodeUtils.MD5Encode(map.get("password"));
 		if(acount == null || password == null) return null;
-		Teacher teacher = teacherMapper.findByAcount(acount);
+		Teacher teacher = teacherService.findByAcount(acount);
 		if(teacher == null) return null;
 		if(teacher.getPassword().equals(password)) {
 			String token = JWTUtil.getJws(teacher.getId());

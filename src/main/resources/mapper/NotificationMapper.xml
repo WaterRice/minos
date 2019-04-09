@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.wingsOfHope.minos.mapper.NotificationMapper">
 
+	<resultMap type="Notification" id="notificationResultMap">
+		<id column="notification_id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="time" property="time"/>
+		<association property="teacher" javaType="Teacher">
+			<id column="teacher_id" property="id"/>
+			<result column="tname" property="name"/>
+		</association>
+	</resultMap>
+	
 </mapper>

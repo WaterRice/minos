@@ -18,8 +18,9 @@
 
 package org.wingsOfHope.minos.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.wingsOfHope.minos.entity.Problem;
@@ -37,6 +38,10 @@ public interface ProblemMapper {
 	 */
 	@Select("select * from minos_problem where problem_id = #{id}")
 	@ResultMap(value="problemResultMap")
-	Problem findById(@Param("id") Integer id) throws Exception;
+	Problem findById(Integer id) throws Exception;
+	
+	@Select("select * from minos_problem limit 0, 100")
+	@ResultMap(value="problemResultMap")
+	List<Problem> getAllProblems() throws Exception;
 	
 }

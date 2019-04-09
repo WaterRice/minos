@@ -18,9 +18,16 @@
 
 package org.wingsOfHope.minos.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.wingsOfHope.minos.entity.Notification;
 
 @Mapper
 public interface NotificationMapper {
 
+	@Select("SELECT * FROM minos_notification ORDER BY time DESC LIMIT 8")
+	List<Notification> getLatestNews() throws Exception;
+	
 }
