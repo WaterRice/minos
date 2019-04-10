@@ -45,4 +45,12 @@ public class NotificationMapperTest {
 		}
 	}
 	
+	@Test
+	public void testSave() throws Exception {
+		Notification notification = new Notification();
+		notification.setTitle("title").setContent("content").setTime(0L).setTeacherId(1);
+		notificationMapper.save(notification);
+		System.out.println(notification.getId());
+	}
+	
 }

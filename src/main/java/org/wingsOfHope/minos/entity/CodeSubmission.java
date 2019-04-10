@@ -39,6 +39,8 @@ public class CodeSubmission implements Serializable {
 	
 	private Byte status;
 	
+	private Integer studentId;
+	
 	private Student student;
 	
 	private Integer problemId;

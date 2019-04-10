@@ -20,7 +20,9 @@ package org.wingsOfHope.minos.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.wingsOfHope.minos.entity.Problem;
@@ -28,20 +30,17 @@ import org.wingsOfHope.minos.entity.Problem;
 @Mapper
 public interface ProblemMapper {
 
-	/**
-	 * 根据id获取问题信息
-	 * 
-	 * @param id
-	 * @return Problem
-	 * @throws Exception
-	 * 
-	 */
-	@Select("select * from minos_problem where problem_id = #{id}")
+	@Select("SELECT * FROM minos_problem WHERE problem_id = #{id}")
 	@ResultMap(value="problemResultMap")
 	Problem findById(Integer id) throws Exception;
 	
-	@Select("select * from minos_problem limit 0, 100")
+	@Select("SELECT problem_id,title FROM minos_problem LIMIT 0, 100")
 	@ResultMap(value="problemResultMap")
 	List<Problem> getAllProblems() throws Exception;
+	
+	@Insert("INSERT INTO minos_problem(title,descb,input,output)"
+			+ " VALUES(#{title},#{descb},#{input},#{output})")
+	@Options(useGeneratedKeys=true,keyProperty="id")
+	void save(Problem problem) throws Exception;
 	
 }

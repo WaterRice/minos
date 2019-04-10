@@ -26,10 +26,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain=true)
 @JsonInclude(value=Include.NON_NULL)
 public class Submission implements Serializable {
 
@@ -40,6 +42,10 @@ public class Submission implements Serializable {
 	private Long time;
 	
 	private Byte grade;
+	
+	private Integer studentId;
+	
+	private Integer homeworkId;
 	
 	private Student student;
 	

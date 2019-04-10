@@ -35,4 +35,8 @@ public class NotificationService {
 		return notificationMapper.getLatestNews();
 	}
 	
+	public Integer save(Notification notification) throws Exception {
+		notificationMapper.save(notification);
+		return notification.getId();
+	}
 }

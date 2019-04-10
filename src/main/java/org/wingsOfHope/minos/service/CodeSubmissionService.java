@@ -35,4 +35,9 @@ public class CodeSubmissionService {
 		return codeSubmissionMapper.getAllSubmissions();
 	}
 	
+	public Integer save(CodeSubmission codeSubmission) throws Exception {
+		codeSubmissionMapper.save(codeSubmission);
+		return codeSubmission.getId();
+	}
+	
 }

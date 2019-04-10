@@ -26,10 +26,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain=true)
 @JsonInclude(value=Include.NON_NULL)
 public class Homework implements Serializable {
 
@@ -41,9 +43,11 @@ public class Homework implements Serializable {
 	
 	private String repu;
 	
-	private Long from;
+	private Long start;
 	
-	private Long to;
+	private Long end;
+	
+	private Integer subjectId;
 	
 	private Subject subject;
 	

@@ -20,15 +20,18 @@ package org.wingsOfHope.minos.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.wingsOfHope.minos.entity.Homework;
 
 @Mapper
 public interface HomeworkMapper {
 
-	@Select("select homework_id, title, to from minos_homework order by from desc limit 20")
+	@Select("select homework_id, title, end from minos_homework order by start desc limit 20")
 	@ResultMap(value="homeworkResultMap")
 	List<Homework> getAllHomeworks() throws Exception;
 	
@@ -36,9 +39,15 @@ public interface HomeworkMapper {
 	@ResultMap(value="homeworkResultMap")
 	Homework findById(Integer id) throws Exception;
 	
-	@Select("select to from minos_homework where homework_id = #{id}")
-	Integer getExpiredDateById(Integer id) throws Exception;
+	@Select("select end from minos_homework where homework_id = #{id}")
+	Long getExpiredDate(Integer id) throws Exception;
 	
+	@Insert("insert into minos_homework(title,descb,repu,start,end,subject_id) "
+			+ "values(#{title},#{descb},#{repu},#{start},#{end},#{subjectId})")
+	@Options(useGeneratedKeys=true,keyProperty="id")
+	Integer save(Homework homework) throws Exception;
 	
+	@Update("update minos_homework set end = #{end} where homework_id = #{id}")
+	void updateExpiredDate(Integer id, Long end) throws Exception;
 	
 }
