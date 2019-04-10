@@ -36,7 +36,7 @@ public interface CodeSubmissionMapper {
 	@ResultMap(value="codeSubmissionResultMap")
 	List<CodeSubmission> getAllSubmissions() throws Exception;
 	
-	@Insert("INSERT INTO minos_codesubmission(content,status,studentId,problemId,time,language) "
+	@Insert("INSERT INTO minos_codesubmission(content,status,student_id,problem_id,time,language) "
 			+ "VALUES(#{content},#{status},#{studentId},#{problemId},#{time},#{language})")
 	@Options(useGeneratedKeys=true,keyProperty="id")
 	void save(CodeSubmission codeSubmission) throws Exception;

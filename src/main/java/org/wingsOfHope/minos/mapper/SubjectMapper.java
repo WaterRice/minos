@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.wingsOfHope.minos.entity.Subject;
@@ -38,11 +37,11 @@ public interface SubjectMapper {
 	 * @throws Exception
 	 * 
 	 */
-	@Select("select s.*, t.name as tname "
-			+ "from (select * from minos_subject where subject_id = #{id}) s "
-			+ "inner join minos_teacher t on s.teacher_id = t.teacher_id")
+	@Select("SELECT s.*, t.name as tname "
+			+ "FROM (SELECT * FROM minos_subject WHERE subject_id = #{id}) s "
+			+ "INNER JOIN minos_teacher t ON s.teacher_id = t.teacher_id")
 	@ResultMap(value="subjectResultMap")
-	Subject findById(@Param("id") Integer id) throws Exception;
+	Subject findById(Integer id) throws Exception;
 
 	/**
 	 *  获取课程列表
@@ -51,7 +50,7 @@ public interface SubjectMapper {
 	 * @throws Exception
 	 * 
 	 */
-	@Select("select subject_id, name from minos_subject")
+	@Select("SELECT subject_id, name FROM minos_subject")
 	@ResultMap(value="subjectResultMap")
 	List<Subject> findAll() throws Exception;
 	
@@ -62,7 +61,11 @@ public interface SubjectMapper {
 	 * @throws Exception
 	 * void
 	 */
-	@Insert("insert into minos_subject(name,teacher_id) values(#{subject.name},#{subject.teacherId})")
-	void add(@Param("subject") Subject subject) throws Exception;
+	@Insert("INSERT INTO minos_subject(name,teacher_id) VALUES(#{name},#{teacherId})")
+	void add(Subject subject) throws Exception;
+	
+	@Select("SELECT name,subject_id FROM minos_subject WHERE teacher_id = #{id}")
+	@ResultMap(value="subjectResultMap")
+	List<Subject> getAllSubjectsByTid(Integer tid) throws Exception;
 	
 }

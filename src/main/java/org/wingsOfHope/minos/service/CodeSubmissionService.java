@@ -40,4 +40,8 @@ public class CodeSubmissionService {
 		return codeSubmission.getId();
 	}
 	
+	public boolean exist(Integer studentId, Integer problemId) throws Exception {
+		return codeSubmissionMapper.exist(studentId, problemId) == null ? false : true;
+	}
+	
 }

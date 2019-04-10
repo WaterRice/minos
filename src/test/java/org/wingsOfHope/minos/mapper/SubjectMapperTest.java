@@ -57,4 +57,11 @@ public class SubjectMapperTest {
 		assert subject != null;
 		System.out.println(subject);
 	}
+	
+	@Test
+	public void testGetAllSubjectsByHid() throws Exception {
+		List<Subject> subjects = subjectMapper.getAllSubjectsByTid(1);
+		assert subjects != null && subjects.size() != 0;
+		System.out.println(subjects.toString());
+	}
 }

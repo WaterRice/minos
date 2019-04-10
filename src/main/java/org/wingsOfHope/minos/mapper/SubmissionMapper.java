@@ -25,23 +25,33 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.wingsOfHope.minos.entity.Submission;
 
 @Mapper
 public interface SubmissionMapper {
 
-	@Select("select content,grade,student_id,homework_id "
-			+ "from minos_submission where submission_id = #{id}")
+	@Select("SELECT content,grade,student_id,homework_id "
+			+ "FROM minos_submission WHERE submission_id = #{id}")
 	@ResultMap(value="submissionResultMap")
 	Submission findById(Integer id) throws Exception;
 	
-	@Insert("insert into minos_submission(content,time,student_id,homework_id) "
-			+ "values(#{content},#{time},#{student_id},#{homework_id})")
+	@Insert("INSERT INTO minos_submission(content,time,student_id,homework_id) "
+			+ "VALUES(#{content},#{time},#{studentId},#{homeworkId})")
 	@Options(useGeneratedKeys=true,keyProperty="id")
 	void save(Submission submission) throws Exception;
 	
-	List<Submission> getAllSubmissionByHid(Integer id) throws Exception;
+	@Select("SELECT submission_id,time,grade,s.student_id,t.name AS sname "
+			+ "FROM minos_submission s INNER JOIN minos_student t ON s.student_id = t.student_id "
+			+ "WHERE homework_id = #{hid}")
+	@ResultMap(value="submissionResultMap")
+	List<Submission> getAllSubmissionsByHid(Integer hid) throws Exception;
 	
-	void updateGrade(Short grade) throws Exception;
+	@Update("UPDATE minos_submission SET grade = #{grade} WHERE submission_id = #{id}")
+	void updateGrade(Short grade, Integer id) throws Exception;
+	
+	@Select("SELECT submission_id FROM minos_submission "
+			+ "WHERE student_id = #{studentId} AND homework_id = #{homeworkId}")
+	Integer exist(Integer studentId, Integer homeworkId) throws Exception;
 	
 }

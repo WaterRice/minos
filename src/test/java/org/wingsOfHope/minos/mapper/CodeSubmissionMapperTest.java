@@ -43,4 +43,27 @@ public class CodeSubmissionMapperTest {
 		System.out.println(submissions.toString());
 	}
 	
+	@Test
+	public void testSave() throws Exception {
+		CodeSubmission codeSubmission = new CodeSubmission()
+				.setContent("content")
+				.setLanguage((byte) 0)
+				.setStatus((byte) 0)
+				.setProblemId(1)
+				.setStudentId(1)
+				.setTime(0L);
+		codeSubmissionMapper.save(codeSubmission);
+		System.out.println(codeSubmission.getId());
+	}
+	
+	@Test
+	public void testExist() throws Exception {
+		Integer id = codeSubmissionMapper.exist(1, 1);
+		if(id == null) {
+			System.out.println(false);
+		} else {
+			System.out.println(true);
+		}	
+	}
+	
 }
