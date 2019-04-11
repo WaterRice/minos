@@ -19,6 +19,7 @@
 package org.wingsOfHope.minos.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -42,5 +43,8 @@ public interface ProblemMapper {
 			+ " VALUES(#{title},#{descb},#{input},#{output})")
 	@Options(useGeneratedKeys=true,keyProperty="id")
 	void save(Problem problem) throws Exception;
+	
+	@Select("select input,output from minos_problem where problem_id = #{id}")
+	Map<String,String> getData(Integer id) throws Exception;
 	
 }

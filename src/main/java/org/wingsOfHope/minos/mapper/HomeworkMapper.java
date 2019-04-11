@@ -50,4 +50,7 @@ public interface HomeworkMapper {
 	@Update("update minos_homework set end = #{end} where homework_id = #{id}")
 	void updateExpiredDate(Integer id, Long end) throws Exception;
 	
+	@Select("select homework_id from minos_homework where homework_id = #{id}")
+	Integer isExist(Integer id) throws Exception;
+	
 }

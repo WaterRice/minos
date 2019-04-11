@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Teacher;
 import org.wingsOfHope.minos.service.TeacherService;
-import org.wingsOfHope.minos.utils.EncodeUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -59,19 +58,12 @@ public class TeacherController {
 	@ApiOperation(value="获取token", notes="密码不对时返回null")
 	@PostMapping("/token")
 	public Teacher login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
-		String acount = map.get("acount");
-		String password = EncodeUtils.MD5Encode(map.get("password"));
-		if(acount == null || password == null) return null;
-		Teacher teacher = teacherService.findByAcount(acount);
-		if(teacher == null) return null;
-		if(teacher.getPassword().equals(password)) {
-			String token = JWTUtil.getJws(teacher.getId());
-			teacher.setPassword(null);
-			response.setHeader("Authorization", token);
-			logger.info("teacher " + teacher.getId() + "login!");
-			return teacher;
+		Teacher teacher = teacherService.login(map.get("acount"), map.get("password"));
+		if(teacher != null) {
+			response.setHeader("Authorization", JWTUtil.getJws(teacher.getId()));
+			logger.info("Teacher " + teacher.getId() + "login!");
 		}
-		return null;
+		return teacher;
 	}
 	
 }

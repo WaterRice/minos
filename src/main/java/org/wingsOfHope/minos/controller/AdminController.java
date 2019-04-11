@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Admin;
 import org.wingsOfHope.minos.service.AdminService;
-import org.wingsOfHope.minos.utils.EncodeUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -59,18 +58,11 @@ public class AdminController {
 	@ApiOperation(value="获取token", notes="密码错误时返回null")
 	@PostMapping("/token")
 	public Admin login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
-		String acount = map.get("acount");
-		String password = EncodeUtils.MD5Encode(map.get("password"));
-		if(acount == null || password == null) return null;
-		Admin admin = adminService.findByAcount(acount);
-		if(admin == null) return null;
-		if(admin.getPassword().equals(password)) {
-			String token = JWTUtil.getJws(admin.getId());
-			admin.setPassword(null);
-			response.setHeader("Authorization", token);
-			logger.info("admin " + admin.getId() + "login");
-			return admin;
+		Admin admin = adminService.login(map.get("acount"), map.get("password"));
+		if(admin != null) {
+			response.setHeader("Authorization", JWTUtil.getJws(admin.getId()));
+			logger.info("Admin " + admin.getId() + "login!");
 		}
-		return null;
+		return admin;
 	}
 }

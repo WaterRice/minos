@@ -65,4 +65,7 @@ public interface StudentMapper {
 	@Options(useGeneratedKeys=true,keyProperty="id")
 	void save(Student student) throws Exception;
 	
+	@Select("select student_id from minos_student where acount = #{acount}")
+	Integer isAcountExist(String acount) throws Exception;
+	
 }
