@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.wingsOfHope.minos.entity.CodeSubmission;
 import org.wingsOfHope.minos.entity.Student;
 import org.wingsOfHope.minos.entity.Submission;
 import org.wingsOfHope.minos.service.StudentService;
@@ -91,12 +92,42 @@ public class StudentController {
 		return student;
 	}
 
+	/**
+	 * 学生作业提交接口
+	 * 
+	 * @param map
+	 * @param request
+	 * @return Boolean
+	 * @throws Exception
+	 * 
+	 */
 	@PostMapping("/submission")
 	public Boolean commit(@RequestBody Map<String, Object> map, HttpServletRequest request) throws Exception {
 		Integer studentId = JWTUtil.parseJws(request.getHeader("Authorization"));
-		Submission submission = new Submission().setStudentId(studentId).setContent((String) map.get("content"))
+		Submission submission = new Submission()
+				.setStudentId(studentId)
+				.setContent((String) map.get("content"))
 				.setHomeworkId((Integer) map.get("homeworkId"));
 		return studentService.commit(submission);
+	}
+	
+	/**
+	 * 学生代码提交接口
+	 * 
+	 * @param map
+	 * @param request
+	 * @return Boolean
+	 * @throws Exception
+	 * 
+	 */
+	public Boolean codeCommit(@RequestBody Map<String,Object> map, HttpServletRequest request) throws Exception {
+		Integer studentId = JWTUtil.parseJws(request.getHeader("Authorization"));
+		CodeSubmission codeSubmission = new CodeSubmission()
+				.setContent((String) map.get("content"))
+				.setLanguage((Byte) map.get("language"))
+				.setProblemId((Integer) map.get("problemId"))
+				.setStudentId(studentId);
+		return studentService.commit(codeSubmission);
 	}
 
 }

@@ -25,6 +25,7 @@ import javax.tools.JavaFileObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.wingsOfHope.minos.entity.CodeSubmission;
 import org.wingsOfHope.minos.entity.Student;
 import org.wingsOfHope.minos.entity.Submission;
@@ -89,6 +90,7 @@ public class StudentService {
 	 * @throws Exception
 	 * 
 	 */
+	@Transactional
 	public Student register(String acount, String password, String email) throws Exception {
 		if (acount == null || password == null || email == null)
 			return null;
@@ -100,6 +102,15 @@ public class StudentService {
 		return student;
 	}
 
+	/**
+	 * 学生提交作业
+	 * 
+	 * @param submission
+	 * @return Boolean
+	 * @throws Exception
+	 * 
+	 */
+	@Transactional
 	public Boolean commit(Submission submission) throws Exception {
 		if (submission.getContent() == null || submission.getHomeworkId() == null)
 			return false;
@@ -112,6 +123,15 @@ public class StudentService {
 		return true;
 	}
 
+	/**
+	 * 学生提交代码
+	 * 
+	 * @param codeSubmission
+	 * @return Boolean
+	 * @throws Exception
+	 * 
+	 */
+	@Transactional
 	public Boolean commit(CodeSubmission codeSubmission) throws Exception {
 		if (codeSubmission.getContent() == null || codeSubmission.getProblemId() == null
 				|| codeSubmission.getStudentId() == null)

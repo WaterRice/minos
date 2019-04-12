@@ -53,4 +53,9 @@ public interface HomeworkMapper {
 	@Select("select homework_id from minos_homework where homework_id = #{id}")
 	Integer isExist(Integer id) throws Exception;
 	
+	@Select("select h.homework_id,h.title,h.end,s.name as sname from minos_homework h inner join "
+			+ "(select subject_id,name from minos_subject where tacher_id = #{tid}) s "
+			+ "on h.subject_id = s.subject_id")
+	List<Homework> getAllHomeworksByTid(Integer tid) throws Exception;
+	
 }

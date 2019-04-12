@@ -18,17 +18,21 @@
 
 package org.wingsOfHope.minos.controller;
 
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.wingsOfHope.minos.entity.Homework;
 import org.wingsOfHope.minos.entity.Teacher;
 import org.wingsOfHope.minos.service.TeacherService;
 import org.wingsOfHope.minos.utils.JWTUtil;
@@ -64,6 +68,12 @@ public class TeacherController {
 			logger.info("Teacher " + teacher.getId() + "login!");
 		}
 		return teacher;
+	}
+	
+	@GetMapping("/publishedHomeworks")
+	public List<Homework> homeworks(HttpServletRequest request) throws Exception {
+		Integer tid = JWTUtil.parseJws(request.getHeader("Authorization"));
+		return null;
 	}
 	
 }
