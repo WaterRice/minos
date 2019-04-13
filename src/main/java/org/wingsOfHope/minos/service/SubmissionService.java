@@ -45,8 +45,9 @@ public class SubmissionService {
 		return submissionMapper.getAllSubmissionsByHid(hid);
 	}
 	
-	public void updateGrade(Integer id, Short newGrade) throws Exception {
+	public Boolean updateGrade(Integer id, Short newGrade) throws Exception {
 		submissionMapper.updateGrade(newGrade, id);
+		return true;
 	}
 	
 	public boolean exist(Integer studentId, Integer homeworkId) throws Exception {

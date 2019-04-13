@@ -22,14 +22,28 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.wingsOfHope.minos.entity.Homework;
 import org.wingsOfHope.minos.mapper.HomeworkMapper;
+import org.wingsOfHope.minos.mapper.SubjectMapper;
 
 @Service
 public class HomeworkService {
 
 	@Autowired
 	HomeworkMapper homeworkMapper;
+	
+	@Autowired
+	SubjectMapper subjectMapper;
+	
+	@Transactional
+	public Boolean sava(Homework homework) throws Exception {
+		if(homework == null) return false;
+		homework.setStart(System.currentTimeMillis());
+		if(subjectMapper.isExist(homework.getSubjectId()) == null) return false;
+		homeworkMapper.save(homework);
+		return true;
+	}
 	
 	public List<Homework> getAllHomeworks() throws Exception {
 		return homeworkMapper.getAllHomeworks();
@@ -43,12 +57,17 @@ public class HomeworkService {
 		return homeworkMapper.getExpiredDate(id);
 	}
 	
-	public void UpdateExpiredDate(Integer id, Long end) throws Exception {
+	public Boolean UpdateExpiredDate(Integer id, Long end) throws Exception {
 		homeworkMapper.updateExpiredDate(id, end);
+		return true;
 	}
 	
-	public Integer save(Homework homework) throws Exception {
-		return homeworkMapper.save(homework);
+//	public Integer save(Homework homework) throws Exception {
+//		return homeworkMapper.save(homework);
+//	}
+	
+	public List<Homework> getAllHomeworksByTid(Integer tid) throws Exception {
+		return homeworkMapper.getAllHomeworksByTid(tid);
 	}
 	
 }

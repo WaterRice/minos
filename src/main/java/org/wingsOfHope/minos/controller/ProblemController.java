@@ -23,24 +23,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Problem;
 import org.wingsOfHope.minos.service.ProblemService;
 
 @RestController
-@RequestMapping("/problems")
 public class ProblemController {
 
 	@Autowired
 	private ProblemService problemService;
 	
-	@GetMapping("/{id}")
+	@GetMapping("/problems/{id}")
 	public Problem findById(@PathVariable Integer id) throws Exception {
 		return problemService.findById(id);
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/problems")
 	public List<Problem> getAllProblems() throws Exception {
 		return problemService.getAllProblems();
 	}

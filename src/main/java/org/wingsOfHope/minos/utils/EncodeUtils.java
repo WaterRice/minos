@@ -26,4 +26,8 @@ public class EncodeUtils {
 		return DigestUtils.md5DigestAsHex(original.getBytes());
 	}
 	
+	public static void main(String[] args) {
+		System.out.println(MD5Encode("777777"));
+	}
+	
 }

@@ -32,8 +32,8 @@ public interface NotificationMapper {
 	@Select("SELECT * FROM minos_notification ORDER BY time DESC LIMIT 8")
 	List<Notification> getLatestNews() throws Exception;
 	
-	@Insert("INSERT INTO minos_notification(title,content,time,teacher_id) "
-			+ "VALUES(#{title},#{content},#{time},#{teacherId})")
+	@Insert("INSERT INTO minos_notification(title,content,time) "
+			+ "VALUES(#{title},#{content},#{time})")
 	@Options(useGeneratedKeys=true,keyProperty="id")
 	void save(Notification notification) throws Exception;
 	

@@ -69,4 +69,11 @@ public class HomeworkMapperTest {
 		System.out.println(homeworkMapper.save(homework));
 	}
 	
+	@Test
+	public void testGetAllHomeworksByTid() throws Exception {
+		List<Homework> homeworks = homeworkMapper.getAllHomeworksByTid(1);
+		assert homeworks != null && homeworks.size() != 0;
+		System.out.println(homeworks.toString());
+	}
+	
 }

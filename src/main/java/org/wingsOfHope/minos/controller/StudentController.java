@@ -101,7 +101,7 @@ public class StudentController {
 	 * @throws Exception
 	 * 
 	 */
-	@PostMapping("/submission")
+	@PostMapping("/submissions")
 	public Boolean commit(@RequestBody Map<String, Object> map, HttpServletRequest request) throws Exception {
 		Integer studentId = JWTUtil.parseJws(request.getHeader("Authorization"));
 		Submission submission = new Submission()
@@ -120,6 +120,7 @@ public class StudentController {
 	 * @throws Exception
 	 * 
 	 */
+	@PostMapping("/codesubmissions")
 	public Boolean codeCommit(@RequestBody Map<String,Object> map, HttpServletRequest request) throws Exception {
 		Integer studentId = JWTUtil.parseJws(request.getHeader("Authorization"));
 		CodeSubmission codeSubmission = new CodeSubmission()

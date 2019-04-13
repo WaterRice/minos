@@ -68,4 +68,7 @@ public interface SubjectMapper {
 	@ResultMap(value="subjectResultMap")
 	List<Subject> getAllSubjectsByTid(Integer tid) throws Exception;
 	
+	@Select("select subject_id from minos_subject where subject_id = #{id}")
+	Integer isExist(Integer id) throws Exception;
+	
 }
