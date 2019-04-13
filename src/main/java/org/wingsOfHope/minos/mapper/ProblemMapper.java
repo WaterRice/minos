@@ -21,11 +21,13 @@ package org.wingsOfHope.minos.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.wingsOfHope.minos.entity.Problem;
 
 @Mapper
@@ -47,4 +49,10 @@ public interface ProblemMapper {
 	@Select("select input,output from minos_problem where problem_id = #{id}")
 	Map<String,String> getData(Integer id) throws Exception;
 	
+	@Update("update minos_problem set title = #{title}, descb = #{descb}, "
+			+ "input = #{input}, output = #{output} where problem_id = #{id}")
+	void update(Problem problem) throws Exception;
+	
+	@Delete("delete from minos_problem where problem_id = #{id}")
+	void delete(Integer id) throws Exception;
 }

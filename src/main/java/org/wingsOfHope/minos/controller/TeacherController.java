@@ -18,6 +18,7 @@
 
 package org.wingsOfHope.minos.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,10 +39,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Homework;
 import org.wingsOfHope.minos.entity.Notification;
+import org.wingsOfHope.minos.entity.Problem;
 import org.wingsOfHope.minos.entity.Submission;
 import org.wingsOfHope.minos.entity.Teacher;
 import org.wingsOfHope.minos.service.HomeworkService;
 import org.wingsOfHope.minos.service.NotificationService;
+import org.wingsOfHope.minos.service.ProblemService;
 import org.wingsOfHope.minos.service.SubmissionService;
 import org.wingsOfHope.minos.service.TeacherService;
 import org.wingsOfHope.minos.utils.JWTUtil;
@@ -65,6 +69,9 @@ public class TeacherController {
 	@Autowired
 	private NotificationService notificationService;
 	
+	@Autowired
+	private ProblemService problemService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(TeacherController.class);
 	
 	/**
@@ -78,13 +85,17 @@ public class TeacherController {
 	 */
 	@ApiOperation(value="获取token", notes="密码不对时返回null")
 	@PostMapping("/token")
-	public Teacher login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
+	public Map<String,Object> login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
 		Teacher teacher = teacherService.login(map.get("acount"), map.get("password"));
 		if(teacher != null) {
 			response.setHeader("Authorization", JWTUtil.getJws(teacher.getId()));
 			logger.info("Teacher " + teacher.getId() + "login!");
 		}
-		return teacher;
+		Map<String,Object> res = new HashMap<String, Object>();
+		if(teacher == null) res.put("status", false);
+		else res.put("status",true);
+		res.put("student",teacher);
+		return res;
 	}
 	
 	/**
@@ -171,6 +182,44 @@ public class TeacherController {
 	@PutMapping("/homework/{id}")
 	public Boolean updateExpDate(@PathVariable Integer id,@RequestParam Long end) throws Exception {
 		return homeworkService.UpdateExpiredDate(id, end);
+	}
+	
+	@PostMapping("/problems")
+	public Integer publishProblem(@RequestBody Map<String,Object> map) throws Exception {
+		Problem problem = new Problem()
+				.setTitle((String) map.get("title"))
+				.setDescb((String) map.get("descb"))
+				.setInput((String) map.get("input"))
+				.setOutput((String) map.get("output"));
+		return problemService.save(problem);
+	}
+	
+	@GetMapping("/problems/{id}")
+	public Problem findProblemById(@PathVariable Integer id) throws Exception {
+		return problemService.findById(id);
+	}
+	
+	@PutMapping("/problems/{id}")
+	public Boolean updateProblemById(@PathVariable Integer id, @RequestBody Map<String,Object> map) throws Exception {
+		Problem problem = new Problem()
+				.setId(id)
+				.setTitle((String) map.get("title"))
+				.setDescb((String) map.get("descb"))
+				.setInput((String) map.get("input"))
+				.setOutput((String) map.get("output"));
+		problemService.update(problem);
+		return true;
+	}
+	
+	@DeleteMapping("/problems/{id}")
+	public Boolean deleteProblemById(@PathVariable Integer id) throws Exception {
+		problemService.delete(id);
+		return true;
+	}
+	
+	@GetMapping("/problems")
+	public List<Problem> getAllProblems() throws Exception {
+		return problemService.getAllProblems();
 	}
 	
 }

@@ -18,6 +18,7 @@
 
 package org.wingsOfHope.minos.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,13 +61,17 @@ public class StudentController {
 	 */
 	@ApiOperation(value = "获取token", notes = "错误密码时返回null")
 	@PostMapping("/token")
-	public Student login(@RequestBody Map<String, String> map, HttpServletResponse response) throws Exception {
+	public Map<String,Object> login(@RequestBody Map<String, String> map, HttpServletResponse response) throws Exception {
 		Student student = studentService.login(map.get("acount"), map.get("password"));
 		if (student != null) {
 			response.setHeader("Authorization", JWTUtil.getJws(student.getId()));
 			logger.info("student " + student.getId() + "login!");
 		}
-		return student;
+		Map<String,Object> res = new HashMap<String, Object>();
+		if(student == null) res.put("status", false);
+		else res.put("status",true);
+		res.put("student",student);
+		return res;
 	}
 
 	/**
@@ -80,7 +85,7 @@ public class StudentController {
 	 */
 	@ApiOperation(value = "注册账号并获取token", notes = "账号已存在时返回null")
 	@PostMapping("/tokens")
-	public Student register(@RequestBody Map<String, String> map, HttpServletResponse response) throws Exception {
+	public Map<String,Object> register(@RequestBody Map<String, String> map, HttpServletResponse response) throws Exception {
 		String acount = map.get("acount");
 		String password = map.get("password");
 		String email = map.get("email");
@@ -89,7 +94,11 @@ public class StudentController {
 			response.setHeader("Authorization", JWTUtil.getJws(student.getId()));
 			logger.info("Student" + student.getId() + "register!");
 		}
-		return student;
+		Map<String,Object> res = new HashMap<String, Object>();
+		if(student == null) res.put("status", false);
+		else res.put("status",true);
+		res.put("student",student);
+		return res;
 	}
 
 	/**

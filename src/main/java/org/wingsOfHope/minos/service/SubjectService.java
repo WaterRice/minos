@@ -43,6 +43,14 @@ public class SubjectService {
 		return subjectMapper.getAllSubjectsByTid(tid);
 	}
 	
+	public void delete(Integer id) throws Exception {
+		subjectMapper.delete(id);
+	}
+	
+	public List<Subject> findAll() throws Exception {
+		return subjectMapper.findAll();
+	}
+	
 //	public boolean isExist(Integer id) throws Exception {
 //		return subjectMapper.isExist(id) == null ? false : true;
 //	}

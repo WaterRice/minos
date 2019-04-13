@@ -18,6 +18,8 @@
 
 package org.wingsOfHope.minos.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wingsOfHope.minos.entity.Teacher;
@@ -47,6 +49,19 @@ public class TeacherService {
 	
 	public Teacher findByAcount(String acount) throws Exception {
 		return teacherMapper.findByAcount(acount);
+	}
+	
+	public List<Teacher> getAll() throws Exception {
+		return teacherMapper.getAllTeachers();
+	}
+	
+	public void save(Teacher teacher) throws Exception {
+		teacher.setPassword(EncodeUtils.MD5Encode(teacher.getPassword()));
+		teacherMapper.save(teacher);
+	}
+	
+	public void delete(Integer id) throws Exception {
+		teacherMapper.delete(id);
 	}
 	
 }

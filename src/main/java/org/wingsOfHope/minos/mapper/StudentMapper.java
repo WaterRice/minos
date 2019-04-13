@@ -18,6 +18,9 @@
 
 package org.wingsOfHope.minos.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -67,5 +70,12 @@ public interface StudentMapper {
 	
 	@Select("select student_id from minos_student where acount = #{acount}")
 	Integer isAcountExist(String acount) throws Exception;
+	
+	@Delete("delete from minos_student where student_id = #{id}")
+	void delete(Integer id) throws Exception;
+	
+	@Select("select * from minos_student")
+	@ResultMap("studentResultMap")
+	List<Student> getAll() throws Exception;
 	
 }

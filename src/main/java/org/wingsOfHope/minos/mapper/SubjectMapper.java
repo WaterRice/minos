@@ -20,6 +20,7 @@ package org.wingsOfHope.minos.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.ResultMap;
@@ -50,7 +51,8 @@ public interface SubjectMapper {
 	 * @throws Exception
 	 * 
 	 */
-	@Select("SELECT subject_id, name FROM minos_subject")
+	@Select("SELECT s.subject_id, s.name, t.name as tname FROM minos_subject s "
+			+ "inner join minos_teacher t on s.teacher_id = t.teacher_id")
 	@ResultMap(value="subjectResultMap")
 	List<Subject> findAll() throws Exception;
 	
@@ -70,5 +72,8 @@ public interface SubjectMapper {
 	
 	@Select("select subject_id from minos_subject where subject_id = #{id}")
 	Integer isExist(Integer id) throws Exception;
+	
+	@Delete("delete from minos_subject where subject_id = {id}")
+	void delete(Integer id) throws Exception;
 	
 }

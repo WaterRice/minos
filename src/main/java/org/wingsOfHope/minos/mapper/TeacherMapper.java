@@ -18,7 +18,12 @@
 
 package org.wingsOfHope.minos.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
@@ -61,5 +66,16 @@ public interface TeacherMapper {
 	 */
 	@Select("select password from minos_teacher where acount = #{acount}")
 	String getPasswordByAcount(@Param("acount") String acount) throws Exception;
+	
+	@Select("select * from minos_teacher")
+	@ResultMap("teacherResultMap")
+	List<Teacher> getAllTeachers() throws Exception;
+	
+	@Insert("insert into minos_teacher(name,acount) values(#{name},#{acount})")
+	@Options(useGeneratedKeys=true,keyProperty="id")
+	void save(Teacher teacher) throws Exception;
+	
+	@Delete("delete from minos_teacher where teacher_id = #{id}")
+	void delete(Integer id) throws Exception;
 	
 }

@@ -39,4 +39,17 @@ public class ProblemService {
 		return problemMapper.getAllProblems();
 	}
 	
+	public Integer save(Problem problem) throws Exception {
+		problemMapper.save(problem);
+		return problem.getId();
+	}
+	
+	public void update(Problem problem) throws Exception {
+		problemMapper.update(problem);
+	}
+	
+	public void delete(Integer id) throws Exception {
+		problemMapper.delete(id);
+	}
+	
 }

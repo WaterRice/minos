@@ -18,6 +18,7 @@
 
 package org.wingsOfHope.minos.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.tools.DiagnosticCollector;
@@ -164,6 +165,14 @@ public class StudentService {
 
 	public boolean isAcountExist(String acount) throws Exception {
 		return studentMapper.isAcountExist(acount) == null ? false : true;
+	}
+	
+	public List<Student> getAllStudents() throws Exception {
+		return studentMapper.getAll();
+	}
+	
+	public void delete(Integer id) throws Exception {
+		studentMapper.delete(id);
 	}
 
 }
