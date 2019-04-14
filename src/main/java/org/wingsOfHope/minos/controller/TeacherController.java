@@ -40,13 +40,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Homework;
 import org.wingsOfHope.minos.entity.Notification;
 import org.wingsOfHope.minos.entity.Problem;
+import org.wingsOfHope.minos.entity.Subject;
 import org.wingsOfHope.minos.entity.Submission;
 import org.wingsOfHope.minos.entity.Teacher;
+import org.wingsOfHope.minos.exception.UnAuthorizedException;
 import org.wingsOfHope.minos.service.HomeworkService;
 import org.wingsOfHope.minos.service.NotificationService;
 import org.wingsOfHope.minos.service.ProblemService;
+import org.wingsOfHope.minos.service.SubjectService;
 import org.wingsOfHope.minos.service.SubmissionService;
 import org.wingsOfHope.minos.service.TeacherService;
+import org.wingsOfHope.minos.utils.CookieUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -72,6 +76,9 @@ public class TeacherController {
 	@Autowired
 	private ProblemService problemService;
 	
+	@Autowired
+	private SubjectService subjectService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(TeacherController.class);
 	
 	/**
@@ -88,7 +95,7 @@ public class TeacherController {
 	public Map<String,Object> login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
 		Teacher teacher = teacherService.login(map.get("acount"), map.get("password"));
 		if(teacher != null) {
-			response.setHeader("Authorization", JWTUtil.getJws(teacher.getId()));
+			CookieUtils.writeCookie(response, "Authorization", JWTUtil.getJws(teacher.getId()));
 			logger.info("Teacher " + teacher.getId() + "login!");
 		}
 		Map<String,Object> res = new HashMap<String, Object>();
@@ -108,8 +115,14 @@ public class TeacherController {
 	 */
 	@GetMapping("/publishedHomeworks")
 	public List<Homework> homeworks(HttpServletRequest request) throws Exception {
-		Integer tid = JWTUtil.parseJws(request.getHeader("Authorization"));
-		return homeworkService.getAllHomeworksByTid(tid);
+		List<Homework> homeworks = null;
+		try {
+			Integer tid = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
+			homeworks = homeworkService.getAllHomeworksByTid(tid);
+		} catch(Exception e) {
+			throw new UnAuthorizedException();
+		}
+		return homeworks;
 	}
 	
 	/**
@@ -133,7 +146,7 @@ public class TeacherController {
 	 * @throws Exception
 	 * 
 	 */
-	@GetMapping("/submission/{id}")
+	@GetMapping("/submissions/{id}")
 	public Submission findById(@PathVariable Integer id) throws Exception {
 		return submissionService.findById(id);
 	}
@@ -147,7 +160,7 @@ public class TeacherController {
 	 * @throws Exception
 	 * 
 	 */
-	@PutMapping("/submission/{id}")
+	@PutMapping("/submissions/{id}")
 	public Boolean comment(@PathVariable Integer id,@RequestParam Short grade) throws Exception {
 		return submissionService.updateGrade(id, grade);
 	}
@@ -169,14 +182,17 @@ public class TeacherController {
 				.setSubjectId((Integer) map.get("subjectId"))
 				.setEnd((Long) map.get("end"));
 		homeworkService.sava(homework);
-		Integer tid = JWTUtil.parseJws(request.getHeader("Authorization"));
-		Teacher teacher = teacherService.findById(tid);
-		Notification notification = new Notification()
-				.setContent(teacher.getName() + "老师发布了作业---" + homework.getTitle())
-				.setTitle("作业通知")
-				.setTime(System.currentTimeMillis());
-		notificationService.save(notification);
-		return true;
+		try {
+			Integer tid = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
+			Teacher teacher = teacherService.findById(tid);
+			Notification notification = new Notification()
+					.setContent(teacher.getName() + "老师发布了作业---" + homework.getTitle()).setTitle("作业通知")
+					.setTime(System.currentTimeMillis());
+			notificationService.save(notification);
+			return true;
+		} catch (Exception e) {
+			throw new UnAuthorizedException();
+		}
 	}
 	
 	@PutMapping("/homework/{id}")
@@ -220,6 +236,12 @@ public class TeacherController {
 	@GetMapping("/problems")
 	public List<Problem> getAllProblems() throws Exception {
 		return problemService.getAllProblems();
+	}
+	
+	@GetMapping("/subjects")
+	public List<Subject> getMySubjects(HttpServletRequest request) throws Exception {
+		Integer tid = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
+		return subjectService.getAllSubjectsByTid(tid);
 	}
 	
 }

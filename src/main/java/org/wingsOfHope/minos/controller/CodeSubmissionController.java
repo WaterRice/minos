@@ -26,7 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.CodeSubmission;
 import org.wingsOfHope.minos.service.CodeSubmissionService;
 
+import io.swagger.annotations.Api;
+
 @RestController
+@Api("CodeSubmissionController API 接口文档")
 public class CodeSubmissionController {
 
 	@Autowired

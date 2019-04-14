@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.wingsOfHope.minos.entity.Subject;
@@ -38,7 +39,7 @@ public interface SubjectMapper {
 	 * @throws Exception
 	 * 
 	 */
-	@Select("SELECT s.*, t.name as tname "
+	@Select("SELECT s.*, t.teacher_id, t.name as tname "
 			+ "FROM (SELECT * FROM minos_subject WHERE subject_id = #{id}) s "
 			+ "INNER JOIN minos_teacher t ON s.teacher_id = t.teacher_id")
 	@ResultMap(value="subjectResultMap")
@@ -54,7 +55,7 @@ public interface SubjectMapper {
 	@Select("SELECT s.subject_id, s.name, t.name as tname FROM minos_subject s "
 			+ "inner join minos_teacher t on s.teacher_id = t.teacher_id")
 	@ResultMap(value="subjectResultMap")
-	List<Subject> findAll() throws Exception;
+	List<Subject> findAllByTid() throws Exception;
 	
 	/**
 	 *  添加课程信息
@@ -64,6 +65,7 @@ public interface SubjectMapper {
 	 * void
 	 */
 	@Insert("INSERT INTO minos_subject(name,teacher_id) VALUES(#{name},#{teacherId})")
+	@Options(useGeneratedKeys=true,keyProperty="id")
 	void add(Subject subject) throws Exception;
 	
 	@Select("SELECT name,subject_id FROM minos_subject WHERE teacher_id = #{id}")

@@ -30,6 +30,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.wingsOfHope.minos.utils.CookieUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 @Configuration
@@ -68,12 +69,17 @@ public class WebConfig implements WebMvcConfigurer {
 		@Override
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 				throws Exception {
-			String token = request.getHeader("Authorization");
-			if (token == null || JWTUtil.parseJws(token) == null) {
+			String token = CookieUtils.getCookie(request, "Authorization");
+			try {
+				if (token == null || JWTUtil.parseJws(token) == null) {
+					response.setStatus(401);
+					return false;
+				}
+				return true;
+			} catch (Exception e) {
 				response.setStatus(401);
 				return false;
 			}
-			return true;
 		}
 	}
 }

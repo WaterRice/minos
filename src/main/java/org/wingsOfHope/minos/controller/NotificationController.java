@@ -26,7 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Notification;
 import org.wingsOfHope.minos.service.NotificationService;
 
+import io.swagger.annotations.Api;
+
 @RestController
+@Api("NotificationController API 接口文档")
 public class NotificationController {
 
 	@Autowired

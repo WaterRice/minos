@@ -35,8 +35,9 @@ public class SubjectService {
 		return subjectMapper.findById(id);
 	}
 	
-	public void add(Subject subject) throws Exception {
+	public Integer add(Subject subject) throws Exception {
 		subjectMapper.add(subject);
+		return subject.getId();
 	}
 	
 	public List<Subject> getAllSubjectsByTid(Integer tid) throws Exception {
@@ -48,10 +49,7 @@ public class SubjectService {
 	}
 	
 	public List<Subject> findAll() throws Exception {
-		return subjectMapper.findAll();
+		return subjectMapper.findAllByTid();
 	}
 	
-//	public boolean isExist(Integer id) throws Exception {
-//		return subjectMapper.isExist(id) == null ? false : true;
-//	}
 }

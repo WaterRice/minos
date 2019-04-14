@@ -45,6 +45,7 @@ import org.wingsOfHope.minos.service.ProblemService;
 import org.wingsOfHope.minos.service.StudentService;
 import org.wingsOfHope.minos.service.SubjectService;
 import org.wingsOfHope.minos.service.TeacherService;
+import org.wingsOfHope.minos.utils.CookieUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -86,7 +87,7 @@ public class AdminController {
 	public Map<String,Object> login(@RequestBody Map<String,String> map, HttpServletResponse response) throws Exception {
 		Admin admin = adminService.login(map.get("acount"), map.get("password"));
 		if(admin != null) {
-			response.setHeader("Authorization", JWTUtil.getJws(admin.getId()));
+			CookieUtils.writeCookie(response, "Authorization", JWTUtil.getJws(admin.getId()));
 			logger.info("Admin " + admin.getId() + "login!");
 		}
 		Map<String,Object> res = new HashMap<String, Object>();
@@ -142,6 +143,14 @@ public class AdminController {
 	@GetMapping("/subjects")
 	public List<Subject> findAllSubjects() throws Exception {
 		return subjectService.findAll();
+	}
+	
+	@PostMapping("/subjects")
+	public Integer savaSubject(@RequestBody Map<String,Object> map) throws Exception {
+		Subject subject = new Subject()
+				.setName((String) map.get("name"))
+				.setTeacherId((Integer) map.get("teacherId"));
+		return subjectService.add(subject);
 	}
 	
 	@DeleteMapping("/subjects/{id}")

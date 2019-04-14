@@ -34,7 +34,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.CodeSubmission;
 import org.wingsOfHope.minos.entity.Student;
 import org.wingsOfHope.minos.entity.Submission;
+import org.wingsOfHope.minos.exception.UnAuthorizedException;
 import org.wingsOfHope.minos.service.StudentService;
+import org.wingsOfHope.minos.utils.CookieUtils;
 import org.wingsOfHope.minos.utils.JWTUtil;
 
 import io.swagger.annotations.Api;
@@ -64,7 +66,7 @@ public class StudentController {
 	public Map<String,Object> login(@RequestBody Map<String, String> map, HttpServletResponse response) throws Exception {
 		Student student = studentService.login(map.get("acount"), map.get("password"));
 		if (student != null) {
-			response.setHeader("Authorization", JWTUtil.getJws(student.getId()));
+			CookieUtils.writeCookie(response, "Authorization", JWTUtil.getJws(student.getId()));
 			logger.info("student " + student.getId() + "login!");
 		}
 		Map<String,Object> res = new HashMap<String, Object>();
@@ -91,7 +93,7 @@ public class StudentController {
 		String email = map.get("email");
 		Student student = studentService.register(acount, password, email);
 		if (student != null) {
-			response.setHeader("Authorization", JWTUtil.getJws(student.getId()));
+			CookieUtils.writeCookie(response, "Authorization", JWTUtil.getJws(student.getId()));
 			logger.info("Student" + student.getId() + "register!");
 		}
 		Map<String,Object> res = new HashMap<String, Object>();
@@ -112,12 +114,16 @@ public class StudentController {
 	 */
 	@PostMapping("/submissions")
 	public Boolean commit(@RequestBody Map<String, Object> map, HttpServletRequest request) throws Exception {
-		Integer studentId = JWTUtil.parseJws(request.getHeader("Authorization"));
-		Submission submission = new Submission()
-				.setStudentId(studentId)
-				.setContent((String) map.get("content"))
-				.setHomeworkId((Integer) map.get("homeworkId"));
-		return studentService.commit(submission);
+		Boolean flag = false;
+		try {
+			Integer studentId = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
+			Submission submission = new Submission().setStudentId(studentId).setContent((String) map.get("content"))
+					.setHomeworkId((Integer) map.get("homeworkId"));
+			flag = studentService.commit(submission);
+		} catch (Exception e) {
+			throw new UnAuthorizedException();
+		}
+		return flag;
 	}
 	
 	/**
@@ -131,13 +137,17 @@ public class StudentController {
 	 */
 	@PostMapping("/codesubmissions")
 	public Boolean codeCommit(@RequestBody Map<String,Object> map, HttpServletRequest request) throws Exception {
-		Integer studentId = JWTUtil.parseJws(request.getHeader("Authorization"));
-		CodeSubmission codeSubmission = new CodeSubmission()
-				.setContent((String) map.get("content"))
-				.setLanguage((Byte) map.get("language"))
-				.setProblemId((Integer) map.get("problemId"))
-				.setStudentId(studentId);
-		return studentService.commit(codeSubmission);
+		Boolean flag = false;
+		try {
+			Integer studentId = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
+			CodeSubmission codeSubmission = new CodeSubmission().setContent((String) map.get("content"))
+					.setLanguage((Byte) map.get("language")).setProblemId((Integer) map.get("problemId"))
+					.setStudentId(studentId);
+			flag = studentService.commit(codeSubmission);
+		} catch (Exception e) {
+			throw new UnAuthorizedException();
+		}
+		return flag;
 	}
 
 }

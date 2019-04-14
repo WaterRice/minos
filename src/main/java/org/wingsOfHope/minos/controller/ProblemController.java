@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Problem;
 import org.wingsOfHope.minos.service.ProblemService;
 
+import io.swagger.annotations.Api;
+
 @RestController
+@Api("ProblemController API 接口文档")
 public class ProblemController {
 
 	@Autowired

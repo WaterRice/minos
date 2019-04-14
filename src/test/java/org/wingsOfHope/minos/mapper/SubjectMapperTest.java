@@ -38,7 +38,7 @@ public class SubjectMapperTest {
 	
 	@Test
 	public void testFindAll() throws Exception {
-		List<Subject> lists = subjectMapper.findAll();
+		List<Subject> lists = subjectMapper.findAllByTid();
 		assert lists != null;
 		System.out.println(lists.toString());
 	}
