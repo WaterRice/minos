@@ -27,7 +27,7 @@ public class EncodeUtils {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(MD5Encode("777777"));
+		System.out.println(MD5Encode("111111"));
 	}
 	
 }
