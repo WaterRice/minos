@@ -18,6 +18,7 @@
 
 package org.wingsOfHope.minos.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -161,8 +166,8 @@ public class TeacherController {
 	 * 
 	 */
 	@PutMapping("/submissions/{id}")
-	public Boolean comment(@PathVariable Integer id,@RequestParam Short grade) throws Exception {
-		return submissionService.updateGrade(id, grade);
+	public boolean comment(@PathVariable Integer id,@RequestBody Map<String,Object> map) throws Exception {
+		return submissionService.updateGrade(id,(Integer) map.get("grade"));
 	}
 	
 	/**
@@ -174,7 +179,7 @@ public class TeacherController {
 	 * 
 	 */
 	@PostMapping("/homeworks")
-	public Boolean publishHomework(@RequestBody Map<String,Object> map, HttpServletRequest request) throws Exception {
+	public boolean publishHomework(@RequestBody Map<String,Object> map, HttpServletRequest request) throws Exception {
 		Homework homework = new Homework()
 				.setTitle((String) map.get("title"))
 				.setDescb((String) map.get("descb"))
@@ -182,21 +187,19 @@ public class TeacherController {
 				.setSubjectId((Integer) map.get("subjectId"))
 				.setEnd((Long) map.get("end"));
 		homeworkService.sava(homework);
-		try {
-			Integer tid = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
-			Teacher teacher = teacherService.findById(tid);
-			Notification notification = new Notification()
-					.setContent(teacher.getName() + "老师发布了作业---" + homework.getTitle()).setTitle("作业通知")
-					.setTime(System.currentTimeMillis());
-			notificationService.save(notification);
-			return true;
-		} catch (Exception e) {
-			throw new UnAuthorizedException();
-		}
+		Integer tid = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
+		Teacher teacher = teacherService.findById(tid);
+		Notification notification = new Notification()
+				.setTeacherId(tid)
+				.setContent(teacher.getName() + "老师发布了作业---" + homework.getTitle())
+				.setTitle("作业通知")
+				.setTime(System.currentTimeMillis());
+		notificationService.save(notification);
+		return true;
 	}
 	
 	@PutMapping("/homework/{id}")
-	public Boolean updateExpDate(@PathVariable Integer id,@RequestParam Long end) throws Exception {
+	public boolean updateExpDate(@PathVariable Integer id,@RequestParam Long end) throws Exception {
 		return homeworkService.UpdateExpiredDate(id, end);
 	}
 	
@@ -206,7 +209,9 @@ public class TeacherController {
 				.setTitle((String) map.get("title"))
 				.setDescb((String) map.get("descb"))
 				.setInput((String) map.get("input"))
-				.setOutput((String) map.get("output"));
+				.setOutput((String) map.get("output"))
+				.setInputExample((String) map.get("inputExample"))
+				.setOutputExample((String) map.get("outputExample"));
 		return problemService.save(problem);
 	}
 	
@@ -216,7 +221,7 @@ public class TeacherController {
 	}
 	
 	@PutMapping("/problems/{id}")
-	public Boolean updateProblemById(@PathVariable Integer id, @RequestBody Map<String,Object> map) throws Exception {
+	public boolean updateProblemById(@PathVariable Integer id, @RequestBody Map<String,Object> map) throws Exception {
 		Problem problem = new Problem()
 				.setId(id)
 				.setTitle((String) map.get("title"))
@@ -228,7 +233,7 @@ public class TeacherController {
 	}
 	
 	@DeleteMapping("/problems/{id}")
-	public Boolean deleteProblemById(@PathVariable Integer id) throws Exception {
+	public boolean deleteProblemById(@PathVariable Integer id) throws Exception {
 		problemService.delete(id);
 		return true;
 	}
@@ -242,6 +247,16 @@ public class TeacherController {
 	public List<Subject> getMySubjects(HttpServletRequest request) throws Exception {
 		Integer tid = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
 		return subjectService.getAllSubjectsByTid(tid);
+	}
+	
+	@GetMapping("/grades/{hid}")
+	public ResponseEntity<byte[]> getGrade(@PathVariable Integer hid) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentDispositionFormData("attachment",
+				new String(("作业" + hid + "成绩表.xlsx").getBytes("utf-8"),"iso-8859-1"));
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ByteArrayOutputStream out = submissionService.getGradesSheet(hid);
+		return new ResponseEntity<byte[]>(out.toByteArray(), headers, HttpStatus.CREATED);
 	}
 	
 }

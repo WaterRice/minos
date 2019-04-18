@@ -11,7 +11,7 @@
 		<result column="homework_id" property="homeworkId"/>
 		<association property="student" javaType="Student">
 			<id column="student_id" property="id"/>
-			<result column="name" property="name"/>
+			<result column="sname" property="name"/>
 		</association>
 		<association property="homework" javaType="Homework">
 			<id column="homework_id" property="id"/>

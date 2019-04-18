@@ -30,7 +30,7 @@ public class HackSystem {
 	private HackSystem() {
 	}
 
-	public final static InputStream in = System.in;
+	public static InputStream in = System.in;
 
 	public final static PrintStream out = new HackPrintStream();
 
@@ -48,7 +48,7 @@ public class HackSystem {
 	private static volatile SecurityManager securityManager = null;
 
 	public static void setIn(InputStream in) {
-		throw new SecurityException("no access to System.setIn()!");
+		HackSystem.in = in;
 	}
 
 	public static void setOut(PrintStream out) {

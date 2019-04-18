@@ -33,6 +33,11 @@ public class JavaClassExecutor {
 
 	public static String execute(byte[] classByte, String args) throws IOException {
 		
+//		//重定向系统输入
+		InputStream inputStream = new ByteArrayInputStream(args.getBytes());
+		
+		HackSystem.setIn(inputStream);
+		
 		ClassModifier cm = new ClassModifier(classByte);
 		
 		byte[] modifyBytes = cm.modifyUTF8Constant("java/lang/System", "org/wingsOfHope/minos/judge/java/executor/HackSystem");
@@ -40,10 +45,6 @@ public class JavaClassExecutor {
 		HotSwapClassLoader classLoader = new HotSwapClassLoader();
 		
 		Class<?> clazz = classLoader.loadByte(modifyBytes);
-		
-		InputStream inputStream = new ByteArrayInputStream(args.getBytes());
-		
-		System.setIn(inputStream);
 		
 		try {
 			Method main = clazz.getMethod("main", new Class[] {String[].class});

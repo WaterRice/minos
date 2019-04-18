@@ -113,8 +113,8 @@ public class StudentController {
 	 * 
 	 */
 	@PostMapping("/submissions")
-	public Boolean commit(@RequestBody Map<String, Object> map, HttpServletRequest request) throws Exception {
-		Boolean flag = false;
+	public boolean commit(@RequestBody Map<String, Object> map, HttpServletRequest request) throws Exception {
+		boolean flag = false;
 		try {
 			Integer studentId = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
 			Submission submission = new Submission().setStudentId(studentId).setContent((String) map.get("content"))
@@ -136,12 +136,14 @@ public class StudentController {
 	 * 
 	 */
 	@PostMapping("/codesubmissions")
-	public Boolean codeCommit(@RequestBody Map<String,Object> map, HttpServletRequest request) throws Exception {
+	public boolean codeCommit(@RequestBody Map<String,Object> map, HttpServletRequest request) throws Exception {
 		Boolean flag = false;
 		try {
 			Integer studentId = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
-			CodeSubmission codeSubmission = new CodeSubmission().setContent((String) map.get("content"))
-					.setLanguage((Byte) map.get("language")).setProblemId((Integer) map.get("problemId"))
+			CodeSubmission codeSubmission = new CodeSubmission()
+					.setContent((String) map.get("content"))
+					.setLanguage((byte) 0)
+					.setProblemId((Integer) map.get("problemId"))
 					.setStudentId(studentId);
 			flag = studentService.commit(codeSubmission);
 		} catch (Exception e) {

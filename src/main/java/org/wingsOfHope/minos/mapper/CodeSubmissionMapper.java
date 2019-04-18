@@ -32,7 +32,7 @@ public interface CodeSubmissionMapper {
 
 	@Select("SELECT c.codesubmission_id, c.status, c.time, c.language, c.problem_id, s.name AS sname "
 			+ "FROM minos_codesubmission c INNER JOIN minos_student s "
-			+ "ON c.student_id = s.student_id")
+			+ "ON c.student_id = s.student_id ORDER BY c.time DESC LIMIT 50")
 	@ResultMap(value="codeSubmissionResultMap")
 	List<CodeSubmission> getAllSubmissions() throws Exception;
 	

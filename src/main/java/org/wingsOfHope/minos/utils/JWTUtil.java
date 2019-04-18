@@ -21,6 +21,8 @@ package org.wingsOfHope.minos.utils;
 import java.util.Date;
 import java.util.UUID;
 
+import org.wingsOfHope.minos.exception.UnAuthorizedException;
+
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -53,16 +55,17 @@ public class JWTUtil {
 	 * 
 	 * @param jws
 	 * @return Integer
+	 * @throws UnAuthorizedException 
 	 * 
 	 */
-	public static Integer parseJws(String jws) {
-		return Integer.parseInt(Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(jws).getBody().getSubject());
+	public static Integer parseJws(String jws) throws UnAuthorizedException {
+		Integer id = null;
+		try {
+			id = Integer.parseInt(Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(jws).getBody().getSubject());
+		} catch(Exception e) {
+			throw new UnAuthorizedException();
+		}
+		return id;
 	}
-	
-//	public static void main(String[] args) {
-//		System.out.println(getJws(1));
-//		System.out.println(getJws(1));
-//		System.out.println(getJws(1));
-//	}
 	
 }

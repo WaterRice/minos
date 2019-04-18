@@ -103,7 +103,9 @@ public class AdminController {
 				.setTitle((String) map.get("title"))
 				.setDescb((String) map.get("descb"))
 				.setInput((String) map.get("input"))
-				.setOutput((String) map.get("output"));
+				.setOutput((String) map.get("output"))
+				.setInputExample((String) map.get("inputExample"))
+				.setOutputExample((String) map.get("outputExample"));
 		return problemService.save(problem);
 	}
 	

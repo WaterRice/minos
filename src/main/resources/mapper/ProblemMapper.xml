@@ -8,6 +8,8 @@
 		<result column="descb" property="descb"/>
 		<result column="input" property="input"/>
 		<result column="output" property="output"/>
+		<result column="input_example" property="inputExample"/>
+		<result column="output_example" property="outputExample"/>
 	</resultMap>
 	
 </mapper>

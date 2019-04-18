@@ -48,10 +48,15 @@ public interface SubmissionMapper {
 	List<Submission> getAllSubmissionsByHid(Integer hid) throws Exception;
 	
 	@Update("UPDATE minos_submission SET grade = #{grade} WHERE submission_id = #{id}")
-	void updateGrade(Short grade, Integer id) throws Exception;
+	void updateGrade(Integer grade, Integer id) throws Exception;
 	
 	@Select("SELECT submission_id FROM minos_submission "
 			+ "WHERE student_id = #{studentId} AND homework_id = #{homeworkId}")
 	Integer exist(Integer studentId, Integer homeworkId) throws Exception;
+	
+	@Select("SELECT s.student_id,s.grade,t.name AS sname FROM minos_submission s INNER JOIN minos_student t "
+			+ "ON s.student_id = t.student_id WHERE homework_id = #{hid}")
+	@ResultMap("submissionResultMap")
+	List<Submission> getGradesSheet(Integer hid) throws Exception;
 	
 }

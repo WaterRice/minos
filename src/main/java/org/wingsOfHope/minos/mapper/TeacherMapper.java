@@ -32,42 +32,18 @@ import org.wingsOfHope.minos.entity.Teacher;
 @Mapper
 public interface TeacherMapper {
 	
-	/**
-	 * 根据id获取教师信息
-	 * 
-	 * @param id
-	 * @return Teacher teacher
-	 * @throws Exception
-	 * 
-	 */
 	@Select("select * from minos_teacher where teacher_id = #{id}")
 	@ResultMap(value="teacherResultMap")
 	Teacher findById(@Param("id") Integer id) throws Exception;
 	
-	/**
-	 * 根据账号查找教师信息
-	 * 
-	 * @param acount
-	 * @return Teacher
-	 * @throws Exception
-	 * 
-	 */
 	@Select("select * from minos_teacher where acount = #{acount}")
 	@ResultMap(value="teacherResultMap")
 	Teacher findByAcount(@Param("acount") String acount) throws Exception;
 	
-	/**
-	 * 获取教师账号对应的密码
-	 * 
-	 * @param acount
-	 * @return String password
-	 * @throws Exception
-	 * 
-	 */
 	@Select("select password from minos_teacher where acount = #{acount}")
 	String getPasswordByAcount(@Param("acount") String acount) throws Exception;
 	
-	@Select("select * from minos_teacher")
+	@Select("select teacher_id,name,acount from minos_teacher")
 	@ResultMap("teacherResultMap")
 	List<Teacher> getAllTeachers() throws Exception;
 	

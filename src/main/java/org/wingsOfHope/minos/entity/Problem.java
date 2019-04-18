@@ -45,6 +45,10 @@ public class Problem implements Serializable {
 	
 	private String output;
 	
+	private String inputExample;
+	
+	private String outputExample;
+	
 	private static final long serialVersionUID = 3634754935543465289L;
 	
 }

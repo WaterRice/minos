@@ -23,6 +23,7 @@ import org.springframework.util.DigestUtils;
 public class EncodeUtils {
 
 	public static String MD5Encode(String original) {
+		if(original == null) return null;
 		return DigestUtils.md5DigestAsHex(original.getBytes());
 	}
 	

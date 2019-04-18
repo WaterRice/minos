@@ -33,7 +33,7 @@ import org.wingsOfHope.minos.entity.Problem;
 @Mapper
 public interface ProblemMapper {
 
-	@Select("SELECT * FROM minos_problem WHERE problem_id = #{id}")
+	@Select("SELECT problem_id,title,input_example,output_example,descb FROM minos_problem WHERE problem_id = #{id}")
 	@ResultMap(value="problemResultMap")
 	Problem findById(Integer id) throws Exception;
 	
@@ -41,18 +41,18 @@ public interface ProblemMapper {
 	@ResultMap(value="problemResultMap")
 	List<Problem> getAllProblems() throws Exception;
 	
-	@Insert("INSERT INTO minos_problem(title,descb,input,output)"
-			+ " VALUES(#{title},#{descb},#{input},#{output})")
+	@Insert("INSERT INTO minos_problem(title,descb,input,output,input_example,output_example)"
+			+ " VALUES(#{title},#{descb},#{input},#{output},#{inputExample},#{outputExample})")
 	@Options(useGeneratedKeys=true,keyProperty="id")
 	void save(Problem problem) throws Exception;
 	
-	@Select("select input,output from minos_problem where problem_id = #{id}")
+	@Select("SELECT input,output FROM minos_problem WHERE problem_id = #{id}")
 	Map<String,String> getData(Integer id) throws Exception;
 	
-	@Update("update minos_problem set title = #{title}, descb = #{descb}, "
-			+ "input = #{input}, output = #{output} where problem_id = #{id}")
+	@Update("UPDATE minos_problem SET title = #{title}, descb = #{descb}, "
+			+ "input = #{input}, output = #{output} WHERE problem_id = #{id}")
 	void update(Problem problem) throws Exception;
 	
-	@Delete("delete from minos_problem where problem_id = #{id}")
+	@Delete("DELETE FROM minos_problem WHERE problem_id = #{id}")
 	void delete(Integer id) throws Exception;
 }
