@@ -27,6 +27,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.wingsOfHope.minos.entity.Homework;
+import org.wingsOfHope.minos.entity.HomeworkDTO;
 
 @Mapper
 public interface HomeworkMapper {
@@ -53,10 +54,11 @@ public interface HomeworkMapper {
 	@Select("select homework_id from minos_homework where homework_id = #{id}")
 	Integer isExist(Integer id) throws Exception;
 	
-	@Select("select h.homework_id,h.title,h.start,h.end,h.subject_id,s.name as sname from minos_homework h inner join "
+	@Select("select sub.sumary,h.homework_id,h.title,h.start,h.end,h.subject_id,s.name as sname from minos_homework h inner join "
 			+ "(select subject_id,name from minos_subject where teacher_id = #{tid}) s "
-			+ "on h.subject_id = s.subject_id")
-	@ResultMap("homeworkResultMap")
-	List<Homework> getAllHomeworksByTid(Integer tid) throws Exception;
+			+ "on h.subject_id = s.subject_id left join (select homework_id,count(*) as sumary from minos_submission) "
+			+ "sub on sub.homework_id = h.homework_id")
+	@ResultMap("homeworkDTOResultMap")
+	List<HomeworkDTO> getAllHomeworksByTid(Integer tid) throws Exception;
 	
 }

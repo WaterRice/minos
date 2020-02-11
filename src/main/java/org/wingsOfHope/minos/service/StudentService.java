@@ -18,12 +18,8 @@
 
 package org.wingsOfHope.minos.service;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaFileObject;
@@ -139,34 +135,42 @@ public class StudentService {
 	 * @throws Exception
 	 * 
 	 */
+//	@Transactional
+//	public boolean commit(CodeSubmission codeSubmission) throws Exception {
+//		boolean flag = false;
+//		if (codeSubmission.getContent() == null || codeSubmission.getProblemId() == null
+//				|| codeSubmission.getStudentId() == null)
+//			return false;
+//		
+//		Map<String, String> data = problemMapper.getData(codeSubmission.getProblemId());
+//		
+////		String ans = executeStringSourceService.execute(codeSubmission.getContent(), data.get("input"));
+//		DiagnosticCollector<JavaFileObject> compileCollector = new DiagnosticCollector<>();
+//		byte[] classBytes = StringSourceCodeCompiler.compile(codeSubmission.getContent(), compileCollector);
+//		String ans = JavaClassExecutor.execute(classBytes, data.get("input"));
+//		
+//		String output = data.get("output");
+//		ans = ans.replaceAll("\r", "");
+//		System.out.println(ans);
+//		System.out.println(data.get("output"));
+//		if (output.equals(ans)) {
+//			codeSubmission.setStatus((byte) 0);
+//			flag = true;
+//		} else {
+//			codeSubmission.setStatus((byte) 1);
+//		}
+//		codeSubmission.setTime(System.currentTimeMillis());
+//		codeSubmissionMapper.save(codeSubmission);
+//		return flag;
+//	}
+	
 	@Transactional
-	public boolean commit(CodeSubmission codeSubmission) throws Exception {
+	public boolean commit(CodeSubmission codeSubmission) {
 		boolean flag = false;
-		if (codeSubmission.getContent() == null || codeSubmission.getProblemId() == null
-				|| codeSubmission.getStudentId() == null)
-			return false;
 		
-		Map<String, String> data = problemMapper.getData(codeSubmission.getProblemId());
-		
-//		String ans = executeStringSourceService.execute(codeSubmission.getContent(), data.get("input"));
-		DiagnosticCollector<JavaFileObject> compileCollector = new DiagnosticCollector<>();
-		byte[] classBytes = StringSourceCodeCompiler.compile(codeSubmission.getContent(), compileCollector);
-		String ans = JavaClassExecutor.execute(classBytes, data.get("input"));
-		
-		String output = data.get("output");
-		ans = ans.replaceAll("\r", "");
-		System.out.println(ans);
-		System.out.println(data.get("output"));
-		if (output.equals(ans)) {
-			codeSubmission.setStatus((byte) 0);
-			flag = true;
-		} else {
-			codeSubmission.setStatus((byte) 1);
-		}
-		codeSubmission.setTime(System.currentTimeMillis());
-		codeSubmissionMapper.save(codeSubmission);
 		return flag;
 	}
+	
 
 	public Student findById(Integer id) throws Exception {
 		return studentMapper.findById(id);
@@ -190,38 +194,6 @@ public class StudentService {
 	
 	public void delete(Integer id) throws Exception {
 		studentMapper.delete(id);
-	}
-	
-	public static void main(String[] args) throws IOException {
-		
-		InputStream inputStream = new ByteArrayInputStream("5 6 7 8 9  8\n".getBytes());
-		
-		InputStream inputStream2 = new ByteArrayInputStream("10 11 12 13\n".getBytes());
-		
-		System.setIn(inputStream);
-		
-		
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println(scanner.nextInt());
-		System.out.println(scanner.nextInt());
-		System.out.println(scanner.nextInt());
-		System.out.println(scanner.nextInt());
-		System.out.println(scanner.nextInt());
-
-		System.setIn(inputStream2);
-		
-		Scanner scanner2 = new Scanner(System.in);
-		
-		System.out.println(scanner2.nextInt());
-		System.out.println(scanner2.nextInt());
-		System.out.println(scanner2.nextInt());
-		System.out.println(scanner2.nextInt());
-		
-//		System.setIn(inputStream2);
-//		
-//		System.out.println(scanner.nextInt());
-		
 	}
 
 }

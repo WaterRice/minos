@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.wingsOfHope.minos.entity.Homework;
+import org.wingsOfHope.minos.entity.HomeworkDTO;
 import org.wingsOfHope.minos.mapper.HomeworkMapper;
 import org.wingsOfHope.minos.mapper.SubjectMapper;
 
@@ -66,7 +67,7 @@ public class HomeworkService {
 //		return homeworkMapper.save(homework);
 //	}
 	
-	public List<Homework> getAllHomeworksByTid(Integer tid) throws Exception {
+	public List<HomeworkDTO> getAllHomeworksByTid(Integer tid) throws Exception {
 		return homeworkMapper.getAllHomeworksByTid(tid);
 	}
 	

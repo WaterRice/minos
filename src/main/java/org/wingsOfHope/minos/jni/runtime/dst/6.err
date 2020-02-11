@@ -1,0 +1,22 @@
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1581076872.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+  File "/mnt/e/myProgram/c/demo/judger/jni/runtime/src/6/main.py", line 1
+    import java.util.Scanner;public class Main{public static void main(String[] args){Scanner scanner = new Scanner(System.in);int a, b;a = scanner.nextInt();b = scanner.nextInt();System.out.println(a + b);scanner.close();}} 
+                                        ^
+SyntaxError: invalid syntax
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1581078392.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1581078392.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1581301009.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1581301010.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1581301100.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1581301100.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1581301478.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1581301478.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec python now

@@ -27,6 +27,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.wingsOfHope.minos.entity.Homework;
+import org.wingsOfHope.minos.entity.HomeworkDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -71,7 +72,7 @@ public class HomeworkMapperTest {
 	
 	@Test
 	public void testGetAllHomeworksByTid() throws Exception {
-		List<Homework> homeworks = homeworkMapper.getAllHomeworksByTid(1);
+		List<HomeworkDTO> homeworks = homeworkMapper.getAllHomeworksByTid(1);
 		assert homeworks != null && homeworks.size() != 0;
 		System.out.println(homeworks.toString());
 	}

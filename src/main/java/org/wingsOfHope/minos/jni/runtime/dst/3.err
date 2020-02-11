@@ -1,0 +1,46 @@
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873083.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873430.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873523.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873576.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873622.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873660.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873677.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873716.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873735.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873764.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580873803.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+Traceback (most recent call last):
+  File "/mnt/e/myProgram/c/demo/judger/jni/runtime/src/3/main.py", line 1, in <module>
+    a = int(input())
+  File "<string>", line 1
+    12 13
+        ^
+SyntaxError: unexpected EOF while parsing
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580874152.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+Traceback (most recent call last):
+  File "/mnt/e/myProgram/c/demo/judger/jni/runtime/src/3/main.py", line 1, in <module>
+    a,b = eval(input())
+  File "<string>", line 1
+    12 13
+        ^
+SyntaxError: unexpected EOF while parsing
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580874331.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1580874332.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec python now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580879344.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec c++ now
+execl: No such file or directory

@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.wingsOfHope.minos.entity.Homework;
+import org.wingsOfHope.minos.entity.HomeworkDTO;
 import org.wingsOfHope.minos.entity.Notification;
 import org.wingsOfHope.minos.entity.Problem;
 import org.wingsOfHope.minos.entity.Subject;
@@ -101,7 +102,7 @@ public class TeacherController {
 		Teacher teacher = teacherService.login(map.get("acount"), map.get("password"));
 		if(teacher != null) {
 			CookieUtils.writeCookie(response, "Authorization", JWTUtil.getJws(teacher.getId()));
-			logger.info("Teacher " + teacher.getId() + "login!");
+			logger.info("Teacher " + teacher.getId() + " login!");
 		}
 		Map<String,Object> res = new HashMap<String, Object>();
 		if(teacher == null) res.put("status", false);
@@ -119,8 +120,8 @@ public class TeacherController {
 	 * 
 	 */
 	@GetMapping("/publishedHomeworks")
-	public List<Homework> homeworks(HttpServletRequest request) throws Exception {
-		List<Homework> homeworks = null;
+	public List<HomeworkDTO> homeworks(HttpServletRequest request) throws Exception {
+		List<HomeworkDTO> homeworks = null;
 		try {
 			Integer tid = JWTUtil.parseJws(CookieUtils.getCookie(request, "Authorization"));
 			homeworks = homeworkService.getAllHomeworksByTid(tid);

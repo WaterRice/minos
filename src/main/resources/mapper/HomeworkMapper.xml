@@ -16,4 +16,19 @@
 		</association>
 	</resultMap>
 	
+	<resultMap type="HomeWorkDTO" id="homeworkDTOResultMap">
+		<id column="homework_id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="descb" property="descb"/>
+		<result column="repu" property="repu"/>
+		<result column="start" property="start"/>
+		<result column="end" property="end"/>
+		<result column="sumary" property="sum"/>
+		<result column="subject_id" property="subjectId"/>
+		<association property="subject" javaType="Subject">
+			<id column="subject_id" property="id"/>
+			<result column="sname" property="name"/>
+		</association>
+	</resultMap>
+	
 </mapper>

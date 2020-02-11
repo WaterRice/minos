@@ -1,0 +1,82 @@
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580815205.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580815649.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580816063.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580816101.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580816534.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580816639.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580826767.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580826949.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580827117.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829019.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829109.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+execl: No such file or directory
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829246.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829366.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829428.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829504.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829547.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829570.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829623.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829675.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829738.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829779.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829807.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+java version "1.8.0_171"
+Java(TM) SE Runtime Environment (build 1.8.0_171-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829845.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+Error: Could not find or load main class classpath=.mnt.e.myProgram.c.demo.judger.jni.runtime.src.2
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829881.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+Unrecognized option: -classpath=/mnt/e/myProgram/c/demo/judger/jni/runtime/src/2
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580829960.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1580829960.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580879435.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580880087.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580880571.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1580880571.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] start: 1580969338.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/1.in] exec java now
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] start: 1580969338.
+[/mnt/e/myProgram/c/demo/judger/jni/testcase/1000/2.in] exec java now

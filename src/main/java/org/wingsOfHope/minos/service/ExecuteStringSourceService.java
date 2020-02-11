@@ -35,7 +35,7 @@ public class ExecuteStringSourceService {
             // 获取编译错误信息
             List<Diagnostic<? extends JavaFileObject>> compileError = compileCollector.getDiagnostics();
             StringBuilder compileErrorRes = new StringBuilder();
-            for (Diagnostic diagnostic : compileError) {
+            for (Diagnostic<? extends JavaFileObject> diagnostic : compileError) {
                 compileErrorRes.append("Compilation error at ");
                 compileErrorRes.append(diagnostic.getLineNumber());
                 compileErrorRes.append(".");

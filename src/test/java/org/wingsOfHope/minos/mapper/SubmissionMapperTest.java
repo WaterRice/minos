@@ -64,7 +64,7 @@ public class SubmissionMapperTest {
 	
 	@Test
 	public void testUpdateGrade() throws Exception {
-		submissionMapper.updateGrade((short) 100, 1);
+		submissionMapper.updateGrade(100, 1);
 	}
 	
 	@Test
